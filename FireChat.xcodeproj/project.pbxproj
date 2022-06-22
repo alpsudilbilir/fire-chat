@@ -8,17 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153382C82863CB9D00CACE3C /* FireChatApp.swift */; };
-		153382CB2863CB9D00CACE3C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153382CA2863CB9D00CACE3C /* ContentView.swift */; };
+		153382CB2863CB9D00CACE3C /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153382CA2863CB9D00CACE3C /* StartScreen.swift */; };
 		153382CD2863CB9E00CACE3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 153382CC2863CB9E00CACE3C /* Assets.xcassets */; };
 		153382D02863CB9E00CACE3C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 153382CF2863CB9E00CACE3C /* Preview Assets.xcassets */; };
+		1585AB032863D87A00957B30 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB022863D87A00957B30 /* LoginScreen.swift */; };
+		1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB052863D94200957B30 /* CustomSecureField.swift */; };
+		1585AB0A2863DA0E00957B30 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB092863DA0E00957B30 /* CustomTextField.swift */; };
+		1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */; };
+		1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */; };
+		1585AB122863DECB00957B30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB112863DECB00957B30 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		153382C52863CB9D00CACE3C /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		153382C82863CB9D00CACE3C /* FireChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireChatApp.swift; sourceTree = "<group>"; };
-		153382CA2863CB9D00CACE3C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		153382CA2863CB9D00CACE3C /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		153382CC2863CB9E00CACE3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		153382CF2863CB9E00CACE3C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1585AB022863D87A00957B30 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		1585AB052863D94200957B30 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
+		1585AB092863DA0E00957B30 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		1585AB112863DECB00957B30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				153382C82863CB9D00CACE3C /* FireChatApp.swift */,
-				153382CA2863CB9D00CACE3C /* ContentView.swift */,
+				1585AB102863DEC300957B30 /* Models */,
+				1585AB0B2863DC0200957B30 /* Extensions */,
+				1585AB012863D72C00957B30 /* Screens */,
 				153382CC2863CB9E00CACE3C /* Assets.xcassets */,
 				153382CE2863CB9E00CACE3C /* Preview Content */,
 			);
@@ -65,6 +79,42 @@
 				153382CF2863CB9E00CACE3C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1585AB012863D72C00957B30 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				153382CA2863CB9D00CACE3C /* StartScreen.swift */,
+				1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */,
+				1585AB022863D87A00957B30 /* LoginScreen.swift */,
+				1585AB042863D91400957B30 /* StartScreenSubViews */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		1585AB042863D91400957B30 /* StartScreenSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				1585AB052863D94200957B30 /* CustomSecureField.swift */,
+				1585AB092863DA0E00957B30 /* CustomTextField.swift */,
+			);
+			path = StartScreenSubViews;
+			sourceTree = "<group>";
+		};
+		1585AB0B2863DC0200957B30 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1585AB102863DEC300957B30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1585AB112863DECB00957B30 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				153382CB2863CB9D00CACE3C /* ContentView.swift in Sources */,
+				1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */,
+				153382CB2863CB9D00CACE3C /* StartScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
+				1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */,
+				1585AB122863DECB00957B30 /* User.swift in Sources */,
+				1585AB032863D87A00957B30 /* LoginScreen.swift in Sources */,
+				1585AB0A2863DA0E00957B30 /* CustomTextField.swift in Sources */,
+				1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

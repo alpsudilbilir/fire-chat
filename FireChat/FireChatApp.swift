@@ -11,7 +11,7 @@ import SwiftUI
 struct FireChatApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartScreen()
         }
     }
 }
