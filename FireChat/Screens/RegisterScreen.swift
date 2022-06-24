@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterScreen: View {
     @State var user = User()
+    var fireBaseManager = FireBaseManager()
     var body: some View {
         ScrollView {
             HStack {
@@ -26,17 +27,17 @@ struct RegisterScreen: View {
                 Image(systemName: "person.circle")
                     .resizable()
                     .foregroundColor(.fire.opacity(0.5))
-                    .frame(minWidth: 120, maxWidth: 200, minHeight: 135, maxHeight: 200, alignment: .center)
+                    .frame(minWidth: 120, maxWidth: 180, minHeight: 160, maxHeight: 200, alignment: .center)
             }
             
-            CustomTextField(prompt: "First name", text: $user.name)
-            CustomTextField(prompt: "Last name", text: $user.surname)
+//            CustomTextField(prompt: "First name", text: $user.name)
+//            CustomTextField(prompt: "Last name", text: $user.surname)
             CustomTextField(prompt: "Email", text: $user.email)
                 .keyboardType(.emailAddress)
             CustomSecureField(prompt: "Password", text: $user.password)
             
             Button {
-                //Register
+                fireBaseManager.createNewAccount(email: user.email, password: user.password)
             } label: {
                 Text("Register")
                     .foregroundColor(.white)
@@ -45,11 +46,11 @@ struct RegisterScreen: View {
                     .clipShape(Capsule())
                     .padding()
             }
-
-            
-            
         }
         .navigationBarHidden(true)
+    }
+    private func createNewAccount() {
+        
     }
 }
 

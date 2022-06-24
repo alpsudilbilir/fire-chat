@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct FireChatApp: App {
     var body: some Scene {
         WindowGroup {
             StartScreen()
+                .onAppear {
+                    FirebaseApp.configure()
+                }
         }
     }
 }

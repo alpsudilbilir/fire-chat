@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginScreen: View {
     @State var user = User()
+    var fireBaseManager = FireBaseManager()
     var body: some View {
         ScrollView {
             HStack {
@@ -25,7 +26,7 @@ struct LoginScreen: View {
             CustomSecureField(prompt: "Password", text: $user.password)
             
             Button {
-                //Validation
+                fireBaseManager.loginUser(email: user.email, password: user.password)
             } label: {
                 Text("Login")
                     .foregroundColor(.white)

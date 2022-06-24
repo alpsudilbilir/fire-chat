@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct StartScreen: View {
     let screens = ["Login", "Register"]
     @State private var selectedScreen = "Login"
+    
     
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(.fire)

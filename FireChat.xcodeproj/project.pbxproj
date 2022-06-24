@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151A33D12865EF5A005F039B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 151A33D02865EF5A005F039B /* FirebaseAuth */; };
+		151A33D32865EF5A005F039B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 151A33D22865EF5A005F039B /* FirebaseStorage */; };
+		151A33D52865F0BC005F039B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 151A33D42865F0BC005F039B /* GoogleService-Info.plist */; };
+		151A33D72865F245005F039B /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151A33D62865F245005F039B /* FireBaseManager.swift */; };
 		153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153382C82863CB9D00CACE3C /* FireChatApp.swift */; };
 		153382CB2863CB9D00CACE3C /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153382CA2863CB9D00CACE3C /* StartScreen.swift */; };
 		153382CD2863CB9E00CACE3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 153382CC2863CB9E00CACE3C /* Assets.xcassets */; };
@@ -20,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		151A33D42865F0BC005F039B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		151A33D62865F245005F039B /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
 		153382C52863CB9D00CACE3C /* FireChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		153382C82863CB9D00CACE3C /* FireChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireChatApp.swift; sourceTree = "<group>"; };
 		153382CA2863CB9D00CACE3C /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
@@ -38,12 +44,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				151A33D12865EF5A005F039B /* FirebaseAuth in Frameworks */,
+				151A33D32865EF5A005F039B /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		151A33D82865F6D7005F039B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				151A33D62865F245005F039B /* FireBaseManager.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		153382BC2863CB9D00CACE3C = {
 			isa = PBXGroup;
 			children = (
@@ -64,10 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				153382C82863CB9D00CACE3C /* FireChatApp.swift */,
+				151A33D82865F6D7005F039B /* Networking */,
 				1585AB102863DEC300957B30 /* Models */,
 				1585AB0B2863DC0200957B30 /* Extensions */,
 				1585AB012863D72C00957B30 /* Screens */,
 				153382CC2863CB9E00CACE3C /* Assets.xcassets */,
+				151A33D42865F0BC005F039B /* GoogleService-Info.plist */,
 				153382CE2863CB9E00CACE3C /* Preview Content */,
 			);
 			path = FireChat;
@@ -133,6 +151,10 @@
 			dependencies = (
 			);
 			name = FireChat;
+			packageProductDependencies = (
+				151A33D02865EF5A005F039B /* FirebaseAuth */,
+				151A33D22865EF5A005F039B /* FirebaseStorage */,
+			);
 			productName = FireChat;
 			productReference = 153382C52863CB9D00CACE3C /* FireChat.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +183,9 @@
 				Base,
 			);
 			mainGroup = 153382BC2863CB9D00CACE3C;
+			packageReferences = (
+				151A33CF2865EF5A005F039B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 153382C62863CB9D00CACE3C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -177,6 +202,7 @@
 			files = (
 				153382D02863CB9E00CACE3C /* Preview Assets.xcassets in Resources */,
 				153382CD2863CB9E00CACE3C /* Assets.xcassets in Resources */,
+				151A33D52865F0BC005F039B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				151A33D72865F245005F039B /* FireBaseManager.swift in Sources */,
 				1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */,
 				153382CB2863CB9D00CACE3C /* StartScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
@@ -395,6 +422,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		151A33CF2865EF5A005F039B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		151A33D02865EF5A005F039B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 151A33CF2865EF5A005F039B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		151A33D22865EF5A005F039B /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 151A33CF2865EF5A005F039B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 153382BD2863CB9D00CACE3C /* Project object */;
 }
