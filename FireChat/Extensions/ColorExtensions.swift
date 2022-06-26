@@ -11,3 +11,4 @@ import SwiftUI
 extension Color {
     static let fire = Color.red.opacity(0.7)
 }
+

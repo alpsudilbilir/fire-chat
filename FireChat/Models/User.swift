@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 struct User: Codable {
     var email: String = ""
     var password: String = ""
+    var image: String?
 }
