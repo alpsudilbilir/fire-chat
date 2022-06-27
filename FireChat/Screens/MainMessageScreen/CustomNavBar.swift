@@ -6,19 +6,29 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CustomNavBar: View {
     @State var showConfirmationDialog = false
+    @ObservedObject var viewModel = MainMessagesViewModel()
     var body: some View {
         HStack(spacing: 15) {
-            Image(systemName: "person.fill")
+            
+            WebImage(url: URL(string: viewModel.user?.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
                 .resizable()
-                .foregroundColor(.fire)
-                .padding(8)
-                .frame(width: 32, height: 32)
+                .scaledToFill()
+                .frame(width: 40, height: 40)
+                .cornerRadius(40)
+                .clipped()
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
+//            Image(systemName: "person.fill")
+//                .resizable()
+//                .foregroundColor(.fire)
+//                .padding(8)
+//                .frame(width: 40, height: 40)
+//                .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             VStack(alignment: .leading, spacing: 0) {
-                Text("User name")
+                Text(viewModel.user?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? "Unkown")
                     .font(.system(size: 24, weight: .semibold))
                 HStack {
                     Circle()
@@ -27,7 +37,6 @@ struct CustomNavBar: View {
                     Text("online")
                         .foregroundColor(Color.gray)
                         .font(.caption)
-                    
                 }
             }
             Spacer()
