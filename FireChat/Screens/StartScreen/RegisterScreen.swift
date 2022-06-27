@@ -61,7 +61,6 @@ struct RegisterScreen: View {
                     .padding()
             }
         }
-        .navigationBarHidden(true)
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(image: $image)
         }
