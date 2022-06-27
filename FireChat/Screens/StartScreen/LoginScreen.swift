@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginScreen: View {
     @State var user = User()
     var fireBaseManager = FireBaseManager()
+    @State private var showsheet = false
     var body: some View {
         ScrollView {
             HStack {
@@ -27,6 +28,7 @@ struct LoginScreen: View {
             
             Button {
                 fireBaseManager.loginUser(email: user.email, password: user.password)
+                showsheet.toggle()
             } label: {
                 Text("Login")
                     .foregroundColor(.white)
@@ -36,6 +38,9 @@ struct LoginScreen: View {
                     .padding()
             }
             Spacer()
+        }
+        .sheet(isPresented: $showsheet) {
+            MainMessages()
         }
     }
 }

@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import Firebase
+
 struct StartScreen: View {
     let screens = ["Login", "Register"]
     @State private var selectedScreen = "Login"
-    
-    
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(.fire)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.white)], for: .selected)
@@ -33,10 +31,10 @@ struct StartScreen: View {
                 RegisterScreen()
             }
             Spacer()
-            
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -10,13 +10,12 @@ import Firebase
 
 @main
 struct FireChatApp: App {
+    init() {
+        FirebaseApp.configure()
+    }
     var body: some Scene {
         WindowGroup {
-            MainMessages()
-//            StartScreen()
-//                .onAppear {
-//                    FirebaseApp.configure()
-//                }
+            StartScreen()
         }
     }
 }

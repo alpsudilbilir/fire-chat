@@ -13,14 +13,11 @@ struct MainMessages: View {
             VStack {
                 CustomNavBar()
                 MessageItem()
-              
             }
             .overlay(NewMessageButton(), alignment: .bottom)
             .navigationBarHidden(true)
         }
-
     }
-    
 }
 
 struct MainMessages_Previews: PreviewProvider {

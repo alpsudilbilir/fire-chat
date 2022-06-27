@@ -16,6 +16,7 @@ struct CustomTextField: View {
                 TextField(prompt, text: $text)
                     .disableAutocorrection(true)
                     .textInputAutocapitalization(.never)
+                
                 Spacer()
             }
             .padding(.horizontal)
