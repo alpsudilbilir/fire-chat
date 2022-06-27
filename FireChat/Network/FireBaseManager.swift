@@ -11,10 +11,26 @@ import FirebaseStorage
 import FirebaseFirestore
 import UIKit
 
-class FireBaseManager {
+class FireBaseManager: NSObject {
+    let auth: Auth
+    let storage: Storage
+    let firestore: Firestore
+    
+    static let shared = FireBaseManager()
+    
+    override init() {
+
+        
+        self.auth = Auth.auth()
+        self.storage = Storage.storage()
+        self.firestore = Firestore.firestore()
+        
+        super.init()
+        
+    }
     
     func createNewAccount(email: String, password: String, image: UIImage) {
-        Auth.auth().createUser(withEmail: email, password: password) { result, err in
+        FireBaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
             if let err = err {
                 print("Failed to create user:", err)
                 return
@@ -26,7 +42,7 @@ class FireBaseManager {
     }
     
     func loginUser(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { res, err in
+        FireBaseManager.shared.auth.signIn(withEmail: email, password: password) { res, err in
             if let err = err {
                 print("Failed to login. \(err)")
                 return
@@ -38,7 +54,7 @@ class FireBaseManager {
     func saveImageToStorage(email: String, image: UIImage) {
         //let filename = UUID().uuidString
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let ref = Storage.storage().reference(withPath: uid)
+        let ref = FireBaseManager.shared.storage.reference(withPath: uid)
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         ref.putData(imageData, metadata: nil) { metadata, err in
             if let err = err {
@@ -61,7 +77,7 @@ class FireBaseManager {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let userData = ["email": email, "uid": uid, "imageUrl": imageUrl.absoluteString]
 
-        Firestore.firestore().collection("users").document(uid).setData(userData) { err in
+        FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
             if let err = err {
                 print("Failed to save user info. \(err)")
                 return
