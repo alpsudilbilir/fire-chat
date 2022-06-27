@@ -9,7 +9,19 @@ import SwiftUI
 
 struct NewMessageButton: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            //new message
+        }, label: {
+            Text("+ New Message")
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, maxHeight: 44)
+                .background(Color.fire)
+                .foregroundColor(.white)
+                .cornerRadius(25)
+                .shadow(radius: 15)
+                .padding(.horizontal)
+
+        })
     }
 }
 

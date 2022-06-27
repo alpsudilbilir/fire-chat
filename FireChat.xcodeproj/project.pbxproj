@@ -19,6 +19,10 @@
 		1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */; };
 		1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */; };
 		1585AB122863DECB00957B30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB112863DECB00957B30 /* User.swift */; };
+		15BAA06C286A17D600B26884 /* MainMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06B286A17D600B26884 /* MainMessages.swift */; };
+		15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06D286A22E100B26884 /* CustomNavBar.swift */; };
+		15BAA070286A247000B26884 /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06F286A247000B26884 /* MessageItem.swift */; };
+		15BAA072286A24CF00B26884 /* NewMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA071286A24CF00B26884 /* NewMessageButton.swift */; };
 		15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D41F98286880D2003686E3 /* ImagePicker.swift */; };
 		15D41F9F28689AF9003686E3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 15D41F9E28689AF9003686E3 /* FirebaseAuth */; };
 		15D41FA128689AF9003686E3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 15D41FA028689AF9003686E3 /* FirebaseFirestore */; };
@@ -39,6 +43,10 @@
 		1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		1585AB112863DECB00957B30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		15BAA06B286A17D600B26884 /* MainMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessages.swift; sourceTree = "<group>"; };
+		15BAA06D286A22E100B26884 /* CustomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBar.swift; sourceTree = "<group>"; };
+		15BAA06F286A247000B26884 /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
+		15BAA071286A24CF00B26884 /* NewMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageButton.swift; sourceTree = "<group>"; };
 		15D41F98286880D2003686E3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,10 +115,8 @@
 		1585AB012863D72C00957B30 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				153382CA2863CB9D00CACE3C /* StartScreen.swift */,
-				1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */,
-				1585AB022863D87A00957B30 /* LoginScreen.swift */,
-				1585AB042863D91400957B30 /* StartScreenSubViews */,
+				15BAA069286A175600B26884 /* StartScreen */,
+				15BAA06A286A178D00B26884 /* MainMessageScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -138,6 +144,28 @@
 				1585AB112863DECB00957B30 /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		15BAA069286A175600B26884 /* StartScreen */ = {
+			isa = PBXGroup;
+			children = (
+				153382CA2863CB9D00CACE3C /* StartScreen.swift */,
+				1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */,
+				1585AB022863D87A00957B30 /* LoginScreen.swift */,
+				1585AB042863D91400957B30 /* StartScreenSubViews */,
+			);
+			path = StartScreen;
+			sourceTree = "<group>";
+		};
+		15BAA06A286A178D00B26884 /* MainMessageScreen */ = {
+			isa = PBXGroup;
+			children = (
+				15BAA06B286A17D600B26884 /* MainMessages.swift */,
+				15BAA06F286A247000B26884 /* MessageItem.swift */,
+				15BAA071286A24CF00B26884 /* NewMessageButton.swift */,
+				15BAA06D286A22E100B26884 /* CustomNavBar.swift */,
+			);
+			path = MainMessageScreen;
 			sourceTree = "<group>";
 		};
 		15D41F97286880BF003686E3 /* Helpers */ = {
@@ -229,11 +257,15 @@
 			files = (
 				151A33D72865F245005F039B /* FireBaseManager.swift in Sources */,
 				1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */,
+				15BAA070286A247000B26884 /* MessageItem.swift in Sources */,
 				153382CB2863CB9D00CACE3C /* StartScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
 				1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */,
 				1585AB122863DECB00957B30 /* User.swift in Sources */,
+				15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */,
+				15BAA06C286A17D600B26884 /* MainMessages.swift in Sources */,
 				1585AB032863D87A00957B30 /* LoginScreen.swift in Sources */,
+				15BAA072286A24CF00B26884 /* NewMessageButton.swift in Sources */,
 				15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */,
 				1585AB0A2863DA0E00957B30 /* CustomTextField.swift in Sources */,
 				1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */,
