@@ -19,24 +19,21 @@ struct StartScreen: View {
     }
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                Picker("Select your screen", selection: $selectedScreen) {
-                    ForEach(screens, id:\.self) {
-                        Text($0)
-                    }
+        ScrollView {
+            Picker("Select your screen", selection: $selectedScreen) {
+                ForEach(screens, id:\.self) {
+                    Text($0)
                 }
-                .padding()
-                .pickerStyle(SegmentedPickerStyle())
-                if selectedScreen == "Login" {
-                    LoginScreen()
-                } else {
-                    RegisterScreen()
-                }
-                Spacer()
-                
             }
-            .navigationBarHidden(true)
+            .padding()
+            .pickerStyle(SegmentedPickerStyle())
+            if selectedScreen == "Login" {
+                LoginScreen()
+            } else {
+                RegisterScreen()
+            }
+            Spacer()
+            
         }
     }
 }
