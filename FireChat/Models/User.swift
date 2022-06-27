@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct User: Codable {
-    var uid = UUID()
+    var uid: String = ""
     var email: String = ""
     var password: String = ""
     var imageUrl: String?
