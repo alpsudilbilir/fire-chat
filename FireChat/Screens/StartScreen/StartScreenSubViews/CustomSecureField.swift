@@ -19,7 +19,6 @@ struct CustomSecureField: View {
                 Spacer()
             }
             .padding(.horizontal)
-            
             Divider()
                 .frame(maxWidth: .infinity, maxHeight: 1.5)
                 .overlay(.red)

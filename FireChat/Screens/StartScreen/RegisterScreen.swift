@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterScreen: View {
-    var fireBaseManager = FireBaseManager()
+    @EnvironmentObject var viewModel: MainMessagesViewModel
     @State var user = User()
     @State var showImagePicker = false
     @State var image: UIImage?
@@ -22,7 +22,6 @@ struct RegisterScreen: View {
                 Spacer()
             }
             .padding()
-            
             Button {
                 showImagePicker.toggle()
             } label: {
@@ -34,8 +33,6 @@ struct RegisterScreen: View {
                             .frame(width: 150, height: 150)
                             .cornerRadius(75)
                             .overlay(Circle().stroke(Color.fire, lineWidth: 2))
-                            
-
                     } else {
                         Image(systemName: "person.circle")
                             .resizable()
@@ -49,9 +46,8 @@ struct RegisterScreen: View {
             CustomTextField(prompt: "Email", text: $user.email)
                 .keyboardType(.emailAddress)
             CustomSecureField(prompt: "Password", text: $user.password)
-            
             Button {
-                fireBaseManager.createNewAccount(email: user.email, password: user.password, image: image ?? UIImage())
+                viewModel.createNewAccount(email: user.email, password: user.password, image: image ?? nil)
             } label: {
                 Text("Register")
                     .foregroundColor(.white)
@@ -66,9 +62,9 @@ struct RegisterScreen: View {
         }
     }
 }
-
 struct RegisterScreen_Previews: PreviewProvider {
     static var previews: some View {
         RegisterScreen()
+            .environmentObject(MainMessagesViewModel())
     }
 }

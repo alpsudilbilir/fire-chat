@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct LoginScreen: View {
+    @EnvironmentObject var viewModel:  MainMessagesViewModel
     @State var user = User()
     var fireBaseManager = FireBaseManager()
-    @State private var showsheet = false
     var body: some View {
         ScrollView {
             HStack {
@@ -21,14 +21,11 @@ struct LoginScreen: View {
                 Spacer()
             }
             .padding()
-
-            CustomTextField(prompt: "Email", text: $user.email)
-                .keyboardType(.emailAddress)
+            CustomTextField(prompt: "Email", text: $user.email)                .keyboardType(.emailAddress)
             CustomSecureField(prompt: "Password", text: $user.password)
             
             Button {
-                fireBaseManager.loginUser(email: user.email, password: user.password)
-                showsheet.toggle()
+                viewModel.loginUser(email: user.email, password: user.password)
             } label: {
                 Text("Login")
                     .foregroundColor(.white)
@@ -39,15 +36,12 @@ struct LoginScreen: View {
             }
             Spacer()
         }
-        .sheet(isPresented: $showsheet) {
-            MainMessages()
-        }
     }
 }
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen()
-            
+            .environmentObject(MainMessagesViewModel())
     }
 }

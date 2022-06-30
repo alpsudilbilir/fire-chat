@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct StartScreen: View {
+    @EnvironmentObject var viewModel: MainMessagesViewModel
     let screens = ["Login", "Register"]
     @State private var selectedScreen = "Login"
-    init() {
-        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(.fire)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.white)], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.fire)], for: .normal)
-    }
-    
     var body: some View {
         ScrollView {
             Picker("Select your screen", selection: $selectedScreen) {
@@ -23,6 +18,7 @@ struct StartScreen: View {
                     Text($0)
                 }
             }
+            .onAppear(perform: customizePicker)
             .padding()
             .pickerStyle(SegmentedPickerStyle())
             if selectedScreen == "Login" {
@@ -32,12 +28,17 @@ struct StartScreen: View {
             }
             Spacer()
         }
+        .environmentObject(viewModel)
+    }
+    private func customizePicker() {
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(.fire)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.white)], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(.fire)], for: .normal)
     }
 }
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         StartScreen()
+            .environmentObject(MainMessagesViewModel())
     }
 }

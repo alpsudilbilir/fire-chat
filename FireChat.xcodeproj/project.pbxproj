@@ -164,8 +164,8 @@
 		15BAA06A286A178D00B26884 /* MainMessageScreen */ = {
 			isa = PBXGroup;
 			children = (
-				15BAA06B286A17D600B26884 /* MainMessages.swift */,
 				15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */,
+				15BAA06B286A17D600B26884 /* MainMessages.swift */,
 				15BAA06F286A247000B26884 /* MessageItem.swift */,
 				15BAA071286A24CF00B26884 /* NewMessageButton.swift */,
 				15BAA06D286A22E100B26884 /* CustomNavBar.swift */,

@@ -10,12 +10,14 @@ import Firebase
 
 @main
 struct FireChatApp: App {
+    @StateObject var viewModel =  MainMessagesViewModel()
     init() {
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
-            StartScreen()
+            MainMessages()
+                .environmentObject(viewModel)
         }
     }
 }

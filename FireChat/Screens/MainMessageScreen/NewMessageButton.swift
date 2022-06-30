@@ -20,7 +20,6 @@ struct NewMessageButton: View {
                 .cornerRadius(25)
                 .shadow(radius: 15)
                 .padding(.horizontal)
-
         })
     }
 }
