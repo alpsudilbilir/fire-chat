@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct MainMessages: View {
+    @EnvironmentObject var viewModel: MainMessagesViewModel
     var body: some View {
         NavigationView {
             VStack {
                 CustomNavBar()
                 MessageItem()
             }
+            .environmentObject(viewModel)
             .overlay(NewMessageButton(), alignment: .bottom)
             .navigationBarHidden(true)
+            .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, onDismiss: nil) {
+                StartScreen()
+                    .environmentObject(viewModel)
+            }
         }
     }
 }
@@ -23,5 +29,6 @@ struct MainMessages: View {
 struct MainMessages_Previews: PreviewProvider {
     static var previews: some View {
         MainMessages()
+            .environmentObject(MainMessagesViewModel())
     }
 }
