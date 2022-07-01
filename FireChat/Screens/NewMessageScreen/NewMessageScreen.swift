@@ -24,7 +24,7 @@ struct NewMessageScreen: View {
                             .clipped()
                             .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
                         NavigationLink {
-                            Text("Destination")
+                            ChatScreen(user: user)
                         } label: {
                             Text(user.email)
                                 .font(.title3)
@@ -50,6 +50,7 @@ struct NewMessageScreen: View {
                 }
             }
         }
+        .accentColor(.fire)
     }
 }
 
