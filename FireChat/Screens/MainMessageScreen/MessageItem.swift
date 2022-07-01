@@ -11,26 +11,34 @@ struct MessageItem: View {
     var body: some View {
         ScrollView {
             ForEach(0..<10, id:\.self) { number in
-                HStack {
-                    Image(systemName: "person.fill")
-                        .resizable()
-                        .foregroundColor(.fire)
-                        .padding(8)
-                        .frame(width: 44, height: 44)
-                        .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
-                    VStack(alignment: .leading) {
-                        Text("Username")
-                            .fontWeight(.bold)
-                        Text("Message sent to user")
-                            .font(.caption)
+                NavigationLink {
+                    //TODO: Send real users here.
+                    ChatScreen(user: User(uid: "", email: "testuser@gmail.com", password: "", imageUrl: ""))
+                } label: {
+                    HStack {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .foregroundColor(.fire)
+                            .padding(8)
+                            .frame(width: 44, height: 44)
+                            .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
+                        VStack(alignment: .leading) {
+                            Text("Username")
+                                .fontWeight(.bold)
+                            Text("Message sent to user")
+                                .font(.caption)
+                        }
+                        Spacer()
+                        Text("22d")
+                            .font(.system(size: 14))
+                            .bold()
                     }
-                    Spacer()
-                    Text("22d")
-                        .font(.system(size: 14))
-                        .bold()
+                    .padding()
+                    Divider()
                 }
-                .padding()
-                Divider()
+                .foregroundColor(.primary)
+
+               
             }
         }
     }

@@ -19,6 +19,7 @@
 		1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */; };
 		1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */; };
 		1585AB122863DECB00957B30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB112863DECB00957B30 /* User.swift */; };
+		158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158FB964286FA56900A1F902 /* ChatScreen.swift */; };
 		15B36CD8286E6F3B00E2ECB9 /* NewMessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */; };
 		15B36CDA286E756100E2ECB9 /* NewMessageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */; };
 		15BAA06C286A17D600B26884 /* MainMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06B286A17D600B26884 /* MainMessages.swift */; };
@@ -47,6 +48,7 @@
 		1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		1585AB112863DECB00957B30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		158FB964286FA56900A1F902 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
 		15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageScreen.swift; sourceTree = "<group>"; };
 		15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageScreenViewModel.swift; sourceTree = "<group>"; };
 		15BAA06B286A17D600B26884 /* MainMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessages.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */,
 				15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */,
+				158FB964286FA56900A1F902 /* ChatScreen.swift */,
 			);
 			path = NewMessageScreen;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				153382CB2863CB9D00CACE3C /* StartScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
 				1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */,
+				158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */,
 				15B36CDA286E756100E2ECB9 /* NewMessageScreenViewModel.swift in Sources */,
 				1585AB122863DECB00957B30 /* User.swift in Sources */,
 				15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */,
