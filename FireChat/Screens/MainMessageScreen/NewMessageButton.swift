@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct NewMessageButton: View {
+    @State var showNewMessageScreen = false
     var body: some View {
         Button(action: {
-            //new message
+                showNewMessageScreen.toggle()
+            
         }, label: {
             Text("+ New Message")
                 .fontWeight(.bold)
@@ -21,6 +23,9 @@ struct NewMessageButton: View {
                 .shadow(radius: 15)
                 .padding(.horizontal)
         })
+        .fullScreenCover(isPresented: $showNewMessageScreen) {
+            NewMessageScreen()
+        }
     }
 }
 
