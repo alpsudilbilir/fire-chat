@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ChatScreen: View {
-    @State var user: User
+    let user: User
     
     var body: some View {
-        VStack {
-            Text("Chat Here!")
+        ScrollView {
+            ForEach(0..<100) { message in
+                Text("Fake messages here")
+            }
         }
         .navigationTitle("\(user.email)")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
