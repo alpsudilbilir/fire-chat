@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StartScreen: View {
+struct LoginRegisterScreen: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
     let screens = ["Login", "Register"]
     @State private var selectedScreen = "Login"
@@ -38,7 +38,7 @@ struct StartScreen: View {
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        StartScreen()
+        LoginRegisterScreen()
             .environmentObject(MainMessagesViewModel())
     }
 }
