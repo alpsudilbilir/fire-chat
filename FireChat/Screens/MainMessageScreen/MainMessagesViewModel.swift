@@ -52,11 +52,11 @@ class MainMessagesViewModel: ObservableObject {
                 print("Failed to create user:", err)
                 return
             }
-            self.saveImageToStorage(email: email, image: image!)
+            self.saveImageToStorage(email: email, password: password, image: image!)
             print("Successfully created user: \(result?.user.uid ?? "")")
         }
     }
-    private func saveImageToStorage(email: String, image: UIImage) {
+    private func saveImageToStorage(email: String,password: String, image: UIImage) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = FireBaseManager.shared.storage.reference(withPath: uid)
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
@@ -72,13 +72,13 @@ class MainMessagesViewModel: ObservableObject {
                 }
                 print("Successfully stored image with url.")
                 guard let url = url else { return }
-                self.saveUserInfo(email: email, imageUrl: url)
+                self.saveUserInfo(email: email, password: password, imageUrl: url)
             }
         }
     }
-    private func saveUserInfo(email: String, imageUrl: URL) {
+    private func saveUserInfo(email: String,password: String, imageUrl: URL) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["email": email, "uid": uid, "imageUrl": imageUrl.absoluteString]
+        let userData = ["email": email,"password": password , uid: "uid", "imageUrl": imageUrl.absoluteString]
         
         FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
             if let err = err {

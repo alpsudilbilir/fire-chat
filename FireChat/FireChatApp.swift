@@ -16,7 +16,7 @@ struct FireChatApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            MainMessages()
+            ContentView()
                 .environmentObject(viewModel)
         }
     }

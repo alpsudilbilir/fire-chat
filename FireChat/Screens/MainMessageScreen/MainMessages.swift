@@ -10,7 +10,6 @@ import SwiftUI
 struct MainMessages: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
     var body: some View {
-        NavigationView {
             VStack {
                 CustomNavBar()
                 MessageItem()
@@ -19,10 +18,9 @@ struct MainMessages: View {
             .overlay(NewMessageButton(), alignment: .bottom)
             .navigationBarHidden(true)
             .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, onDismiss: nil) {
-                StartScreen()
+                LoginRegisterScreen()
                     .environmentObject(viewModel)
             }
-        }
     }
 }
 
