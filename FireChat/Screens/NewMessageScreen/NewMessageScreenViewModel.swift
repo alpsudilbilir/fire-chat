@@ -9,7 +9,7 @@ import Foundation
 
 
 class NewMessageScreenViewModel: ObservableObject {
-    @Published var users = [User]()
+    @Published var users = [User]() // Users that will be showed to current user in new message screen.
     init() {
         fetchAllUsers()
     }

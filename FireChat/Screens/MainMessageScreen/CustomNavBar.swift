@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct CustomNavBar: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
+    @State var showNewMessageScreen = false
     @State var showConfirmationDialog = false
     var body: some View {
         HStack(spacing: 15) {
@@ -34,6 +35,16 @@ struct CustomNavBar: View {
             }
             Spacer()
             Button {
+                showNewMessageScreen.toggle()
+            } label: {
+                Image(systemName: "plus.bubble")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.fire)
+            }
+            Spacer()
+                .frame(width: 1)
+            Button {
                 showConfirmationDialog.toggle()
             } label: {
                 Image(systemName: "gear")
@@ -43,6 +54,13 @@ struct CustomNavBar: View {
             }
         }
         .padding(.horizontal)
+        .fullScreenCover(isPresented: $showNewMessageScreen) {
+            NewMessageScreen(didSelectNewUser: { user  in
+                print(user.email)
+                viewModel.userThatWillBeMessaged = user
+                viewModel.isNavigationLinkActive.toggle()
+                 })
+        }
         .confirmationDialog(Text("Do you want to sign out?"), isPresented: $showConfirmationDialog, actions: {
             Button("Cancel", role: .cancel) { }
             Button("Sign out", role: .destructive) {

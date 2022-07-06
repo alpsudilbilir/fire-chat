@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct NewMessageScreen: View {
     @Environment(\.presentationMode) var dismiss
     @ObservedObject var viewModel = NewMessageScreenViewModel()
+    let didSelectNewUser: (User) -> ()
     var body: some View {
         NavigationView {
             ScrollView {
@@ -23,8 +24,9 @@ struct NewMessageScreen: View {
                             .cornerRadius(52)
                             .clipped()
                             .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
-                        NavigationLink {
-                            ChatScreen(user: user)
+                        Button {
+                            dismiss.wrappedValue.dismiss()
+                            didSelectNewUser(user)
                         } label: {
                             Text(user.email)
                                 .font(.title3)
@@ -56,6 +58,8 @@ struct NewMessageScreen: View {
 
 struct NewMessageScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NewMessageScreen()
+        NewMessageScreen(didSelectNewUser: { _ in 
+            
+        })
     }
 }
