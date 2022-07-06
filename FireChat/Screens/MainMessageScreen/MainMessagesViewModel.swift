@@ -12,7 +12,9 @@ import SwiftUI
 
 class MainMessagesViewModel: ObservableObject {
     @Published var user: User?
+    @Published var userThatWillBeMessaged: User?
     @Published var isUserLoggedOut = false
+    @Published var isNavigationLinkActive = false
     
     init() {
         DispatchQueue.main.async {

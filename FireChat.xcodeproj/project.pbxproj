@@ -26,7 +26,6 @@
 		15BAA06C286A17D600B26884 /* MainMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06B286A17D600B26884 /* MainMessages.swift */; };
 		15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06D286A22E100B26884 /* CustomNavBar.swift */; };
 		15BAA070286A247000B26884 /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06F286A247000B26884 /* MessageItem.swift */; };
-		15BAA072286A24CF00B26884 /* NewMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA071286A24CF00B26884 /* NewMessageButton.swift */; };
 		15BAA074286A3E4400B26884 /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */; };
 		15BAA077286A4D3A00B26884 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 15BAA076286A4D3A00B26884 /* SDWebImageSwiftUI */; };
 		15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D41F98286880D2003686E3 /* ImagePicker.swift */; };
@@ -56,7 +55,6 @@
 		15BAA06B286A17D600B26884 /* MainMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessages.swift; sourceTree = "<group>"; };
 		15BAA06D286A22E100B26884 /* CustomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBar.swift; sourceTree = "<group>"; };
 		15BAA06F286A247000B26884 /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
-		15BAA071286A24CF00B26884 /* NewMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageButton.swift; sourceTree = "<group>"; };
 		15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
 		15D41F98286880D2003686E3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,9 +161,8 @@
 		15B36CD6286E6F1700E2ECB9 /* NewMessageScreen */ = {
 			isa = PBXGroup;
 			children = (
-				15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */,
 				15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */,
-				158FB964286FA56900A1F902 /* ChatScreen.swift */,
+				15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */,
 			);
 			path = NewMessageScreen;
 			sourceTree = "<group>";
@@ -187,8 +184,8 @@
 				15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */,
 				15BAA06B286A17D600B26884 /* MainMessages.swift */,
 				15BAA06F286A247000B26884 /* MessageItem.swift */,
-				15BAA071286A24CF00B26884 /* NewMessageButton.swift */,
 				15BAA06D286A22E100B26884 /* CustomNavBar.swift */,
+				158FB964286FA56900A1F902 /* ChatScreen.swift */,
 			);
 			path = MainMessageScreen;
 			sourceTree = "<group>";
@@ -296,7 +293,6 @@
 				15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */,
 				15BAA06C286A17D600B26884 /* MainMessages.swift in Sources */,
 				1585AB032863D87A00957B30 /* LoginScreen.swift in Sources */,
-				15BAA072286A24CF00B26884 /* NewMessageButton.swift in Sources */,
 				15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */,
 				1585AB0A2863DA0E00957B30 /* CustomTextField.swift in Sources */,
 				1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */,

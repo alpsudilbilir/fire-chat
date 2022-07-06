@@ -9,13 +9,11 @@ import SwiftUI
 
 struct MessageItem: View {
     @ObservedObject var mainMessagesViewModel = MainMessagesViewModel()
-
+    
     var body: some View {
         ScrollView {
             ForEach(0..<10, id:\.self) { number in
-
-
-                NavigationLink {
+                NavigationLink(isActive: $mainMessagesViewModel.isNavigationLinkActive)  {
                     //TODO: Send real users here.
                     ChatScreen(user: User(uid: "", email: "testuser@gmail.com", password: "", imageUrl: ""))
                 } label: {
@@ -41,8 +39,6 @@ struct MessageItem: View {
                     Divider()
                 }
                 .foregroundColor(.primary)
-
-               
             }
         }
     }

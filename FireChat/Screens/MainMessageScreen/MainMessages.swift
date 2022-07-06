@@ -13,9 +13,15 @@ struct MainMessages: View {
             VStack {
                 CustomNavBar()
                 MessageItem()
+                if let user = viewModel.userThatWillBeMessaged {
+                    NavigationLink("", isActive: $viewModel.isNavigationLinkActive) {
+                        ChatScreen(user: user)
+                    }
+                }
+                
+
             }
             .environmentObject(viewModel)
-            .overlay(NewMessageButton(), alignment: .bottom)
             .navigationBarHidden(true)
             .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, onDismiss: nil) {
                 LoginRegisterScreen()

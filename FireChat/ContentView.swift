@@ -34,7 +34,7 @@ struct ContentView: View {
                 Image(systemName: "person")
             }
         }
-        .tint(.fire)
+        .accentColor(Color.fire)
     }
 }
 

@@ -14,9 +14,9 @@ struct ChatScreen: View {
     @State var messages = [String]()
     @State var placeholder = "Message"
     @State var isSendButtonDisabled = false
-    
+    @FocusState private var keyboardState: Bool
+
     var body: some View {
-        
         VStack {
             messageView
             bottomBar
@@ -58,39 +58,48 @@ struct ChatScreen: View {
             }
             }
         }
+        .onTapGesture {
+            keyboardState = false
+            placeholder = "Message"
+        }
     }
     private var bottomBar: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "photo.on.rectangle.angled")
-                .font(.system(size: 32))
-                .foregroundColor(.gray)
-            TextEditor(text: $message)
-                .frame(width: .infinity, height: 32, alignment: .center)
-                .overlay {
-                    HStack {
-                        Text(placeholder)
-                            .foregroundColor(.gray)
-                        Spacer()
+        HStack {
+            HStack(spacing: 3) {
+                Image(systemName: "photo.on.rectangle.angled")
+                    .font(.system(size: 36))
+                    .foregroundColor(.gray)
+                  
+                TextEditor(text: $message)
+                    .frame(maxWidth: .infinity, minHeight: 32, idealHeight: 32, maxHeight: 32, alignment: .center)
+                    .focused($keyboardState)
+                    .overlay {
+                        HStack {
+                            Text(placeholder)
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
                     }
-                }
-                .onTapGesture {
-                    placeholder = ""
-                   
-                    
-                }
+                    .onTapGesture {
+                        placeholder = ""
+                       
+                    }
+            }.padding(.horizontal)
+            
             Button {
                 if !message.isEmpty {
                     messages.append(message)
                     message = ""
+
                 }
                 
             } label: {
-                Image(systemName: "paperplane.circle.fill")
-                    .font(.system(size: 32))
+                Image(systemName: "arrow.right.circle.fill")
+                    .font(.system(size: 36))
                     .foregroundColor(isSendButtonDisabled ? .gray : .fire)
             }.disabled(isSendButtonDisabled)
             Spacer()
-        }.padding(.horizontal)
+        }
     }
 }
 struct ChatScreen_Previews: PreviewProvider {
