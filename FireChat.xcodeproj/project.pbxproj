@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150E820E28778D790044A82D /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E820D28778D790044A82D /* ChatScreenViewModel.swift */; };
 		15180B45287387CB001F3194 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15180B44287387CB001F3194 /* ContentView.swift */; };
 		151A33D52865F0BC005F039B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 151A33D42865F0BC005F039B /* GoogleService-Info.plist */; };
 		151A33D72865F245005F039B /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151A33D62865F245005F039B /* FireBaseManager.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150E820D28778D790044A82D /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
 		15180B44287387CB001F3194 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		151A33D42865F0BC005F039B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		151A33D62865F245005F039B /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				15BAA06F286A247000B26884 /* MessageItem.swift */,
 				15BAA06D286A22E100B26884 /* CustomNavBar.swift */,
 				158FB964286FA56900A1F902 /* ChatScreen.swift */,
+				150E820D28778D790044A82D /* ChatScreenViewModel.swift */,
 			);
 			path = MainMessageScreen;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				15BAA070286A247000B26884 /* MessageItem.swift in Sources */,
 				153382CB2863CB9D00CACE3C /* LoginRegisterScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
+				150E820E28778D790044A82D /* ChatScreenViewModel.swift in Sources */,
 				1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */,
 				158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */,
 				15180B45287387CB001F3194 /* ContentView.swift in Sources */,

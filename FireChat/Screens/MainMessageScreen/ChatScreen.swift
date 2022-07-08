@@ -10,11 +10,15 @@ import SDWebImageSwiftUI
 
 struct ChatScreen: View {
     let user: User
-    @State var message: String = ""
-    @State var messages = [String]()
-    @State var placeholder = "Message"
-    @State var isSendButtonDisabled = false
     @FocusState private var keyboardState: Bool
+    
+    init(user: User) {
+        self.user = user
+        self.vm = .init(user: user)
+    }
+    
+    @ObservedObject var vm : ChatScreenViewModel
+
 
     var body: some View {
         VStack {
@@ -39,7 +43,7 @@ struct ChatScreen: View {
     private var messageView: some View {
         ScrollView {
             ScrollViewReader { value in
-            ForEach(messages, id: \.self) { message in
+                ForEach(vm.messages, id: \.self) { message in
                 HStack {
                     Spacer()
                     HStack {
@@ -54,50 +58,46 @@ struct ChatScreen: View {
                 .padding(.top, 8)
             }
             .onAppear {
-                value.scrollTo(messages.last, anchor: .center)
+                value.scrollTo(vm.messages.last, anchor: .center)
             }
             }
         }
         .onTapGesture {
             keyboardState = false
-            placeholder = "Message"
+            vm.placeholder = "Message"
         }
     }
     private var bottomBar: some View {
+
         HStack {
             HStack(spacing: 3) {
                 Image(systemName: "photo.on.rectangle.angled")
                     .font(.system(size: 36))
                     .foregroundColor(.gray)
                   
-                TextEditor(text: $message)
+                TextEditor(text: $vm.messageText)
                     .frame(maxWidth: .infinity, minHeight: 32, idealHeight: 32, maxHeight: 32, alignment: .center)
                     .focused($keyboardState)
                     .overlay {
                         HStack {
-                            Text(placeholder)
+                            Text(vm.placeholder)
                                 .foregroundColor(.gray)
                             Spacer()
                         }
                     }
                     .onTapGesture {
-                        placeholder = ""
-                       
+                        vm.placeholder = ""
                     }
             }.padding(.horizontal)
             
             Button {
-                if !message.isEmpty {
-                    messages.append(message)
-                    message = ""
-
-                }
+                vm.handleSend(text: vm.messageText)
                 
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .font(.system(size: 36))
-                    .foregroundColor(isSendButtonDisabled ? .gray : .fire)
-            }.disabled(isSendButtonDisabled)
+                    .foregroundColor(vm.isSendButtonDisabled ? .gray : .fire)
+            }.disabled(vm.isSendButtonDisabled)
             Spacer()
         }
     }
