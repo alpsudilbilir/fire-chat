@@ -18,7 +18,6 @@ struct MainMessages: View {
                         ChatScreen(user: user)
                     }
                 }
-                
 
             }
             .environmentObject(viewModel)

@@ -19,14 +19,15 @@ class NewMessageScreenViewModel: ObservableObject {
                     print("Failed to fetch users. \(err)")
                     return
                 }
+                
                 snapshot?.documents.forEach({ snapshot in
                     let data = snapshot.data()
                     let uid = data["uid"] as? String ?? ""
                     let email = data["email"] as? String ?? ""
                     let imageUrl = data["imageUrl"] as? String ?? ""
+                    print(email)
                     self.users.append(User(uid: uid, email: email, password: "", imageUrl: imageUrl))
                     print("Users successfully fetched.")
-
                 })
             }
         }

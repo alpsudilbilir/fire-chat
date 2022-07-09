@@ -80,7 +80,7 @@ class MainMessagesViewModel: ObservableObject {
     }
     private func saveUserInfo(email: String,password: String, imageUrl: URL) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["email": email,"password": password , uid: "uid", "imageUrl": imageUrl.absoluteString]
+        let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString]
         
         FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
             if let err = err {
@@ -96,6 +96,7 @@ class MainMessagesViewModel: ObservableObject {
     }
     private func fetchCurrentUser() {
         guard let uid =  FireBaseManager.shared.auth.currentUser?.uid else { return }
+        print(uid)
         FireBaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, err in
             if let err = err {
                 print("Failed to fetch current user \(err)")
