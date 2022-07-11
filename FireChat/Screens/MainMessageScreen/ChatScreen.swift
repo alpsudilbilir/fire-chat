@@ -41,43 +41,26 @@ struct ChatScreen: View {
     }
     private var messageView: some View {
         ScrollView {
-            ForEach(vm.messages) { message in
+            ScrollViewReader { reader in
                 VStack {
-                    if message.fromId == FireBaseManager.shared.auth.currentUser?.uid {
-                        HStack {
-                            Spacer()
-                            
-                            HStack {
-                                Text(message.message)
-                                    .foregroundColor(.white)
+                    ForEach(vm.messages) { message in
+                        ChatMessageView(message: message)
+                            .onChange(of: vm.messages.count) { newValue in
+                                withAnimation(.easeOut(duration: 0.5)) {
+                                    reader.scrollTo("bottom", anchor: .bottom)
+                                }
                             }
-                            .padding()
-                            .background(Color.fire)
-                            .cornerRadius(10)
-                            .frame(alignment: .leading)
-                            
-                        }
-                        .padding(.horizontal)
-                        .padding(.top, 8)
-                    } else {
-                        HStack {
-                            HStack {
-                                Text(message.message)
-                                    .foregroundColor(.white)
-                            }
-                            .padding()
-                            .background(Color.cyan)
-                            .cornerRadius(10)
-                            .frame(alignment: .leading)
-                            Spacer()
-                            
-                        }
-                        .padding(.horizontal)
-                        .padding(.top, 8)
+                    }.onAppear {
+                        reader.scrollTo("bottom", anchor: .bottom)
                     }
+                    
+                    HStack {
+                        Spacer()
+                    }.id("bottom")
                 }
-            }.onAppear {
-                vm.fetchMessages()
+                .onAppear {
+                    vm.fetchMessages()
+                }
             }
         }
         .onTapGesture {
@@ -85,12 +68,13 @@ struct ChatScreen: View {
             vm.placeholder = "Message"
         }
     }
+
     private var bottomBar: some View {
         
         HStack {
             HStack(spacing: 3) {
                 Image(systemName: "photo.on.rectangle.angled")
-                    .font(.system(size: 36))
+                    .font(.system(size: 32))
                     .foregroundColor(.gray)
                 
                 TextEditor(text: $vm.messageText)
@@ -112,7 +96,7 @@ struct ChatScreen: View {
                 vm.handleSend()
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
-                    .font(.system(size: 36))
+                    .font(.system(size: 32))
                     .foregroundColor(vm.isSendButtonDisabled ? .gray : .fire)
             }.disabled(vm.isSendButtonDisabled)
             Spacer()
