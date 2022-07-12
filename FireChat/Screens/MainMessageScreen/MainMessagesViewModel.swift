@@ -15,6 +15,7 @@ class MainMessagesViewModel: ObservableObject {
     @Published var userThatWillBeMessaged: User?
     @Published var isUserLoggedOut = false
     @Published var isNavigationLinkActive = false
+    @Published var recentMessages = [RecentMessage]()
     
     init() {
         DispatchQueue.main.async {
@@ -111,5 +112,29 @@ class MainMessagesViewModel: ObservableObject {
             self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl)
            FireBaseManager.shared.currentUser = self.currentUser
         }
+    }
+    func fetchRecentMessages() {
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+        FireBaseManager.shared.firestore
+            .collection("recent_messages")
+            .document(uid)
+            .collection("recentMessages")
+            .order(by: "timestamp")
+            .addSnapshotListener { querySnapshot, err in
+                if let err = err {
+                    print("Failed to fetch recent messages \(err).")
+                    return
+                }
+                querySnapshot?.documentChanges.forEach({ change in
+                    let docId = change.document.documentID
+                    if let index = self.recentMessages.firstIndex(where: { recent in
+                        return recent.documentId == docId
+                    }) {
+                        self.recentMessages.remove(at: index)
+                    }
+                    self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
+                })
+                
+            }
     }
 }

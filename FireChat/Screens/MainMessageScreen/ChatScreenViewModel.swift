@@ -39,6 +39,7 @@ class ChatScreenViewModel: ObservableObject {
                 }
             })
         }
+        print("Messages successfully fetched.")
     }
     func handleSend()  {
         print(messageText)
@@ -81,7 +82,7 @@ class ChatScreenViewModel: ObservableObject {
             "fromId" : fromId,
             "toId" : toId,
             "imageUrl" : recipientUser?.imageUrl ?? "",
-            "toEmail" : recipientUser?.email
+            "email" : recipientUser?.email
         ] as [String : Any]
         
         document.setData(data) { err in
@@ -103,7 +104,7 @@ class ChatScreenViewModel: ObservableObject {
             "fromId": currentUser.uid,
             "toId" : toId,
             "imageUrl" : currentUser.imageUrl ?? "",
-            "fromEmail": currentUser.email
+            "email": currentUser.email
         ] as [String : Any]
 
         FireBaseManager.shared.firestore

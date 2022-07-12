@@ -13,6 +13,7 @@ struct MainMessages: View {
             VStack {
                 CustomNavBar()
                 MessageItem()
+                 
                 if let user = viewModel.userThatWillBeMessaged {
                     NavigationLink("", isActive: $viewModel.isNavigationLinkActive) {
                         ChatScreen(user: user)

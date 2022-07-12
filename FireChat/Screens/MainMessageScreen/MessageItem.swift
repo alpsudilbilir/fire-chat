@@ -6,37 +6,52 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
+
 
 struct MessageItem: View {
     @ObservedObject var mainMessagesViewModel = MainMessagesViewModel()
     
+    init() {
+        mainMessagesViewModel.fetchRecentMessages()
+    }
+    
     var body: some View {
         ScrollView {
-            ForEach(0..<10, id:\.self) { number in
-                NavigationLink(isActive: $mainMessagesViewModel.isNavigationLinkActive)  {
-                    //TODO: Send real users here.
-                    ChatScreen(user: User(uid: "", email: "testuser@gmail.com", password: "", imageUrl: ""))
+            ForEach(mainMessagesViewModel.recentMessages, id:\.id) { recentMessage in
+                NavigationLink  {
+                    //TODO: This navigation is buggy. Fix it
+                    ChatScreen(user: User(uid: recentMessage.toId, email: recentMessage.email, password: "", imageUrl: recentMessage.imageUrl))
                 } label: {
-                    HStack {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .foregroundColor(.fire)
-                            .padding(8)
-                            .frame(width: 44, height: 44)
-                            .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
-                        VStack(alignment: .leading) {
-                            Text("Username")
-                                .fontWeight(.bold)
-                            Text("Message sent to user")
-                                .font(.caption)
+                    VStack {
+                        HStack {
+                            WebImage(url: URL(string: recentMessage.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png") )
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 64, height: 64)
+                                .cornerRadius(64)
+                                .clipped()
+                                .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
+                        
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(recentMessage.email)
+                                    .fontWeight(.bold)
+                                Text(recentMessage.message)
+                                    .font(.caption)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(2)
+                                Spacer()
+                            }
+                            Spacer()
+                            Text("\(recentMessage.timestamp.dateValue().formatted(.dateTime.hour().minute()))")
+                                .font(.system(size: 14))
                         }
-                        Spacer()
-                        Text("22d")
-                            .font(.system(size: 14))
-                            .bold()
+                        .padding()
+                        Divider()
+                            .frame(maxWidth: .infinity, maxHeight: 1.5)
+                            .overlay(.red)
                     }
-                    .padding()
-                    Divider()
+                   
                 }
                 .foregroundColor(.primary)
             }

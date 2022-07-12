@@ -35,6 +35,7 @@
 		15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06D286A22E100B26884 /* CustomNavBar.swift */; };
 		15BAA070286A247000B26884 /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06F286A247000B26884 /* MessageItem.swift */; };
 		15BAA074286A3E4400B26884 /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */; };
+		15BF462D287CF580009196F6 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF462C287CF580009196F6 /* RecentMessage.swift */; };
 		15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D41F98286880D2003686E3 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		15BAA06D286A22E100B26884 /* CustomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBar.swift; sourceTree = "<group>"; };
 		15BAA06F286A247000B26884 /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
 		15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
+		15BF462C287CF580009196F6 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		15D41F98286880D2003686E3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +166,7 @@
 			children = (
 				1585AB112863DECB00957B30 /* User.swift */,
 				152549502878891700CBD016 /* ChatMessage.swift */,
+				15BF462C287CF580009196F6 /* RecentMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				153382CB2863CB9D00CACE3C /* LoginRegisterScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
 				150E820E28778D790044A82D /* ChatScreenViewModel.swift in Sources */,
+				15BF462D287CF580009196F6 /* RecentMessage.swift in Sources */,
 				1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */,
 				158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */,
 				15180B45287387CB001F3194 /* ContentView.swift in Sources */,
