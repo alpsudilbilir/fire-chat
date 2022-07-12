@@ -56,7 +56,6 @@ struct CustomNavBar: View {
         .padding(.horizontal)
         .fullScreenCover(isPresented: $showNewMessageScreen) {
             NewMessageScreen(didSelectNewUser: { user  in
-                print(user.email)
                 viewModel.userThatWillBeMessaged = user
                 viewModel.isNavigationLinkActive.toggle()
                  })

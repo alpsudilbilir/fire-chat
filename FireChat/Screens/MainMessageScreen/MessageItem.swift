@@ -11,17 +11,20 @@ import SDWebImageSwiftUI
 
 struct MessageItem: View {
     @ObservedObject var mainMessagesViewModel = MainMessagesViewModel()
-    
-    init() {
+    let didSelectUser: (User?) -> ()
+    init(didSelectUser: @escaping (User?) -> () ) {
+        self.didSelectUser = didSelectUser
         mainMessagesViewModel.fetchRecentMessages()
     }
+
     
     var body: some View {
         ScrollView {
             ForEach(mainMessagesViewModel.recentMessages, id:\.id) { recentMessage in
-                NavigationLink  {
-                    //TODO: This navigation is buggy. Fix it
-                    ChatScreen(user: User(uid: recentMessage.toId, email: recentMessage.email, password: "", imageUrl: recentMessage.imageUrl))
+                Button {
+                    //Mesajı currentuser yazdıysa düzgün çalışıyor ancak karşı taraf yazdıysa bozuluyor doğru id gitmeli.
+                    let user = User(uid: mainMessagesViewModel.currentUser?.uid == recentMessage.fromId ? recentMessage.toId : recentMessage.fromId, email: recentMessage.email, password: "", imageUrl: recentMessage.imageUrl)
+                        didSelectUser(user)
                 } label: {
                     VStack {
                         HStack {
@@ -61,6 +64,8 @@ struct MessageItem: View {
 
 struct MessageItem_Previews: PreviewProvider {
     static var previews: some View {
-        MessageItem()
+        MessageItem(didSelectUser: { _ in
+            
+        })
     }
 }

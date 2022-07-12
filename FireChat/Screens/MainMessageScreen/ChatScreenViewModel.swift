@@ -16,7 +16,7 @@ class ChatScreenViewModel: ObservableObject {
     @Published var messages = [ChatMessage]()
     @Published var placeholder = "Message"
     @Published var isSendButtonDisabled = false
-    let recipientUser: User? 
+    var recipientUser: User?
     
     init(user: User) {
         self.recipientUser = user

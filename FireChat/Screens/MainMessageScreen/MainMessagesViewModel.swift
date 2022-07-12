@@ -16,7 +16,6 @@ class MainMessagesViewModel: ObservableObject {
     @Published var isUserLoggedOut = false
     @Published var isNavigationLinkActive = false
     @Published var recentMessages = [RecentMessage]()
-    
     init() {
         DispatchQueue.main.async {
             self.isUserLoggedOut = FireBaseManager.shared.auth.currentUser?.uid == nil
@@ -115,6 +114,7 @@ class MainMessagesViewModel: ObservableObject {
     }
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+
         FireBaseManager.shared.firestore
             .collection("recent_messages")
             .document(uid)
@@ -132,9 +132,9 @@ class MainMessagesViewModel: ObservableObject {
                     }) {
                         self.recentMessages.remove(at: index)
                     }
-                    self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
+                    //Delete if the recent message comes from user itself.
+                        self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
                 })
-                
             }
     }
 }
