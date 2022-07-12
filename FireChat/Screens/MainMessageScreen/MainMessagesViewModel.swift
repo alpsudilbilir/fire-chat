@@ -11,7 +11,7 @@ import UIKit
 import SwiftUI
 
 class MainMessagesViewModel: ObservableObject {
-    @Published var user: User?
+    @Published var currentUser: User? // Current User
     @Published var userThatWillBeMessaged: User?
     @Published var isUserLoggedOut = false
     @Published var isNavigationLinkActive = false
@@ -45,7 +45,7 @@ class MainMessagesViewModel: ObservableObject {
         isUserLoggedOut = true
     }
     func createNewAccount(email: String, password: String, image: UIImage?) {
-        if image == nil  {
+        if image == nil {
             print("You need to select an image")
             return
         }
@@ -73,7 +73,7 @@ class MainMessagesViewModel: ObservableObject {
                     return
                 }
                 print("Successfully stored image with url.")
-                guard let url = url else { return }
+                guard let url = url else { return }
                 self.saveUserInfo(email: email, password: password, imageUrl: url)
             }
         }
@@ -96,7 +96,6 @@ class MainMessagesViewModel: ObservableObject {
     }
     private func fetchCurrentUser() {
         guard let uid =  FireBaseManager.shared.auth.currentUser?.uid else { return }
-        print(uid)
         FireBaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, err in
             if let err = err {
                 print("Failed to fetch current user \(err)")
@@ -109,7 +108,8 @@ class MainMessagesViewModel: ObservableObject {
             let uid = data["uid"] as? String ?? ""
             let email = data["email"] as? String ?? ""
             let imageUrl = data["imageUrl"] as? String ?? ""
-            self.user = User(uid: uid, email: email, imageUrl: imageUrl)
+            self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl)
+           FireBaseManager.shared.currentUser = self.currentUser
         }
     }
 }

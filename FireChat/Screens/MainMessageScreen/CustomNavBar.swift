@@ -14,7 +14,7 @@ struct CustomNavBar: View {
     @State var showConfirmationDialog = false
     var body: some View {
         HStack(spacing: 15) {
-            WebImage(url: URL(string: viewModel.user?.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
+            WebImage(url: URL(string: viewModel.currentUser?.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 40, height: 40)
@@ -22,7 +22,7 @@ struct CustomNavBar: View {
                 .clipped()
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             VStack(alignment: .leading, spacing: 0) {
-                Text(viewModel.user?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? "Unkown")
+                Text(viewModel.currentUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? "Unkown")
                     .font(.system(size: 24, weight: .semibold))
                 HStack {
                     Circle()

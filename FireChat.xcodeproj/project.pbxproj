@@ -116,8 +116,8 @@
 				1585AB102863DEC300957B30 /* Models */,
 				1585AB0B2863DC0200957B30 /* Extensions */,
 				1585AB012863D72C00957B30 /* Screens */,
-				153382CE2863CB9E00CACE3C /* Preview Content */,
 				15D41F97286880BF003686E3 /* Helpers */,
+				153382CE2863CB9E00CACE3C /* Preview Content */,
 				153382CC2863CB9E00CACE3C /* Assets.xcassets */,
 				151A33D42865F0BC005F039B /* GoogleService-Info.plist */,
 			);
