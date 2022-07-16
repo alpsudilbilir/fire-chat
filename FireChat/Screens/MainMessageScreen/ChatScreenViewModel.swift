@@ -35,7 +35,6 @@ class ChatScreenViewModel: ObservableObject {
                 if change.type == .added {
                     let data = change.document.data()
                     self.messages.append(.init(documentId: change.document.documentID, data: data))
-                    self.messageText = ""
                 }
             })
         }
@@ -66,6 +65,7 @@ class ChatScreenViewModel: ObservableObject {
             }
             print("Successfully saved received message as well.")
         }
+        self.messageText = ""
     }
     func saveMessageForMainScreen() {
         guard let fromId = FireBaseManager.shared.auth.currentUser?.uid else { return }
@@ -91,7 +91,6 @@ class ChatScreenViewModel: ObservableObject {
                 return
             }
             print("Successfully saved recent_messages.")
-            
         }
         /*----------------------------------------------------------
          Save for recipient user

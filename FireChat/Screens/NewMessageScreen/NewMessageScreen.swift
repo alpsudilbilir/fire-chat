@@ -28,7 +28,7 @@ struct NewMessageScreen: View {
                             dismiss.wrappedValue.dismiss()
                             didSelectNewUser(user)
                         } label: {
-                            Text(user.email)
+                            Text(user.username)
                                 .font(.title3)
                                 .foregroundColor(Color(.label))
                         }

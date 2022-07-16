@@ -25,7 +25,7 @@ struct ChatScreen: View {
             messageView
             bottomBar
         }
-        .navigationTitle(user?.email ?? "")
+        .navigationTitle(user?.username ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

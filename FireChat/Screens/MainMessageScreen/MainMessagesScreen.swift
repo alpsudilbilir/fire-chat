@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct MainMessages: View {
+struct MainMessagesScreen: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
+    
     var body: some View {
             VStack {
                 CustomNavBar()
@@ -34,7 +35,7 @@ struct MainMessages: View {
 
 struct MainMessages_Previews: PreviewProvider {
     static var previews: some View {
-        MainMessages()
+        MainMessagesScreen()
             .environmentObject(MainMessagesViewModel())
     }
 }

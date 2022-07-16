@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestoreSwift
 import UIKit
 import SwiftUI
 
@@ -109,12 +110,12 @@ class MainMessagesViewModel: ObservableObject {
             let email = data["email"] as? String ?? ""
             let imageUrl = data["imageUrl"] as? String ?? ""
             self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl)
-           FireBaseManager.shared.currentUser = self.currentUser
+            FireBaseManager.shared.currentUser = self.currentUser
         }
     }
     func fetchRecentMessages() {
-        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
-
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+        
         FireBaseManager.shared.firestore
             .collection("recent_messages")
             .document(uid)
@@ -128,12 +129,13 @@ class MainMessagesViewModel: ObservableObject {
                 querySnapshot?.documentChanges.forEach({ change in
                     let docId = change.document.documentID
                     if let index = self.recentMessages.firstIndex(where: { recent in
-                        return recent.documentId == docId
+                        return recent.id == docId
                     }) {
                         self.recentMessages.remove(at: index)
                     }
-                    //Delete if the recent message comes from user itself.
-                        self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
+                    if let recentMessage = try? change.document.data(as: RecentMessage.self) {
+                        self.recentMessages.insert(recentMessage, at: 0)
+                    }
                 })
             }
     }

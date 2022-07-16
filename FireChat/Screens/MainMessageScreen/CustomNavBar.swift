@@ -22,7 +22,7 @@ struct CustomNavBar: View {
                 .clipped()
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             VStack(alignment: .leading, spacing: 0) {
-                Text(viewModel.currentUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? "Unkown")
+                Text(viewModel.currentUser?.email.components(separatedBy: "@").first ?? "Unkown")
                     .font(.system(size: 24, weight: .semibold))
                 HStack {
                     Circle()
