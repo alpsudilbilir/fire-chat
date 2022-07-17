@@ -20,17 +20,15 @@ struct ContentView: View {
                 Text("Messages")
                 Image(systemName: "message.fill")
             }
-            
-            
             NavigationView{
-                Text("Settings")
+                ProfileScreen()
                     .animation(Animation.default)
                     .transition(.move(edge: .bottom))
-                    .navigationBarHidden(true)
-                
+                    .accentColor(Color.fire)
+                    .environmentObject(viewModel)
             }
             .tabItem {
-                Text("Settings")
+                Text("Profile")
                 Image(systemName: "person")
             }
         }
