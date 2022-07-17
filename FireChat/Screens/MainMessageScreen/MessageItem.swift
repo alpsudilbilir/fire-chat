@@ -53,6 +53,7 @@ struct MessageItem: View {
                         Divider()
                             .frame(maxWidth: .infinity, maxHeight: 1.5)
                             .overlay(.red)
+                            .padding(.horizontal)
                     }
                 }
                 .foregroundColor(.primary)

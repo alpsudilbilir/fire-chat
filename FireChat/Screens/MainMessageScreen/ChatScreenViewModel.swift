@@ -17,27 +17,37 @@ class ChatScreenViewModel: ObservableObject {
     @Published var placeholder = "Message"
     @Published var isSendButtonDisabled = false
     var recipientUser: User?
+    var snapshotListener: ListenerRegistration?
     
     init(user: User) {
         self.recipientUser = user
     }
-
+    
     func fetchMessages() {
         guard let fromId = FireBaseManager.shared.auth.currentUser?.uid else { return } //Sending User
         guard let toId = recipientUser?.uid else { return } //Receiving User
-        
-        FireBaseManager.shared.firestore.collection("messages").document(fromId).collection(toId).order(by: "timestamp").addSnapshotListener { querySnapshot, err in
-            if let err = err {
-                print("Failed to listen messages. \(err)")
-                return
-            }
-            querySnapshot?.documentChanges.forEach({ change in
-                if change.type == .added {
-                    let data = change.document.data()
-                    self.messages.append(.init(documentId: change.document.documentID, data: data))
+        snapshotListener?.remove()
+        messages.removeAll()
+        snapshotListener = FireBaseManager.shared.firestore
+            .collection("messages")
+            .document(fromId)
+            .collection(toId)
+            .order(by: "timestamp")
+            .addSnapshotListener { querySnapshot, err in
+                if let err = err {
+                    print("Failed to listen messages. \(err)")
+                    return
                 }
-            })
-        }
+                querySnapshot?.documentChanges.forEach({ change in
+                    if change.type == .added {
+                        let data = change.document.data()
+                        
+                        if let message = try? change.document.data(as: ChatMessage.self) {
+                            self.messages.append(message)
+                        }
+                    }
+                })
+            }
         print("Messages successfully fetched.")
     }
     func handleSend()  {
@@ -55,7 +65,7 @@ class ChatScreenViewModel: ObservableObject {
             print("Successfully saved current user sending message!")
         }
         saveMessageForMainScreen()
-
+        
         //Receiving user
         let receivedMessageDocument = FireBaseManager.shared.firestore.collection("messages").document(toId).collection(fromId).document()
         receivedMessageDocument.setData(messageData) { err in
@@ -96,7 +106,7 @@ class ChatScreenViewModel: ObservableObject {
          Save for recipient user
          ----------------------------------------------------------*/
         guard let currentUser = FireBaseManager.shared.currentUser else { return }
-
+        
         let recipientRecentMessageDictionary = [
             "timestamp" : Timestamp(),
             "message": self.messageText,
@@ -105,7 +115,7 @@ class ChatScreenViewModel: ObservableObject {
             "imageUrl" : currentUser.imageUrl ?? "",
             "email": currentUser.email
         ] as [String : Any]
-
+        
         FireBaseManager.shared.firestore
             .collection("recent_messages")
             .document(toId)

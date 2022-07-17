@@ -38,6 +38,9 @@ struct ChatScreen: View {
                     .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             }
         }
+        .onDisappear {
+            vm.snapshotListener?.remove()
+        }
     }
     private var messageView: some View {
         ScrollView {

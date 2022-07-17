@@ -17,6 +17,9 @@ class MainMessagesViewModel: ObservableObject {
     @Published var isUserLoggedOut = false
     @Published var isNavigationLinkActive = false
     @Published var recentMessages = [RecentMessage]()
+    
+    private var firestoreListeener: ListenerRegistration?
+    
     init() {
         DispatchQueue.main.async {
             self.isUserLoggedOut = FireBaseManager.shared.auth.currentUser?.uid == nil
@@ -115,8 +118,8 @@ class MainMessagesViewModel: ObservableObject {
     }
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
-        
-        FireBaseManager.shared.firestore
+        firestoreListeener?.remove()
+        firestoreListeener = FireBaseManager.shared.firestore
             .collection("recent_messages")
             .document(uid)
             .collection("recentMessages")
@@ -126,6 +129,7 @@ class MainMessagesViewModel: ObservableObject {
                     print("Failed to fetch recent messages \(err).")
                     return
                 }
+                
                 querySnapshot?.documentChanges.forEach({ change in
                     let docId = change.document.documentID
                     if let index = self.recentMessages.firstIndex(where: { recent in
@@ -135,6 +139,7 @@ class MainMessagesViewModel: ObservableObject {
                     }
                     if let recentMessage = try? change.document.data(as: RecentMessage.self) {
                         self.recentMessages.insert(recentMessage, at: 0)
+                        
                     }
                 })
             }
