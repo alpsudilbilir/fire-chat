@@ -6,15 +6,75 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ProfileScreen: View {
+    @EnvironmentObject var viewModel: MainMessagesViewModel
+    @State var showAlert = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if let imageURL = viewModel.currentUser?.imageUrl {
+                NavigationLink {
+                    PhotoScreen(imageURL: imageURL, isEditButtonAvailable: true)
+                        .environmentObject(viewModel)
+
+                } label: {
+                    WebImage(url: URL(string: imageURL))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 150, height: 150)
+                        .cornerRadius(75)
+                        .clipped()
+                        .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
+                }
+            } else {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(75)
+                    .foregroundColor(.fire)
+            }
+            Text(viewModel.currentUser?.username ?? "Unkown")
+                .font(.system(size: 36))
+            
+            Spacer()
+            Button {
+                showAlert = true
+            } label: {
+                HStack {
+                    Text("Delete Account")
+                        .bold()
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                        .background(Color.fire)
+                        .cornerRadius(50)
+                        .padding()
+                    Spacer()
+                }.padding()
+                
+            }
+
+        }.padding(.vertical)
+        .alert("Do you want to delete your account?", isPresented: $showAlert, actions: {
+            Button(role: .cancel, action: {}) {
+                Text("Cancel")
+            }
+            Button(role: .destructive) {
+                viewModel.deleteAccount()
+            } label: {
+                Text("Delete")
+            }
+        })
+        .navigationTitle("Profile")
+        .onAppear {
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color.fire)]
+        }
     }
 }
 
 struct ProfileScreen_Previews: PreviewProvider {
     static var previews: some View {
         ProfileScreen()
+            .environmentObject(MainMessagesViewModel())
     }
 }

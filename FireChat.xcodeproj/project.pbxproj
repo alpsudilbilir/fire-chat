@@ -27,6 +27,8 @@
 		1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */; };
 		1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */; };
 		1585AB122863DECB00957B30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB112863DECB00957B30 /* User.swift */; };
+		158DC36928842C1100D4B2E1 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36828842C1100D4B2E1 /* ProfileScreen.swift */; };
+		158DC36B2884372600D4B2E1 /* PhotoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36A2884372600D4B2E1 /* PhotoScreen.swift */; };
 		158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158FB964286FA56900A1F902 /* ChatScreen.swift */; };
 		15997244287C3C6800832589 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15997243287C3C6800832589 /* ChatMessageView.swift */; };
 		15997246287C4EE000832589 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15997245287C4EE000832589 /* README.md */; };
@@ -57,6 +59,8 @@
 		1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		1585AB112863DECB00957B30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		158DC36828842C1100D4B2E1 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		158DC36A2884372600D4B2E1 /* PhotoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoScreen.swift; sourceTree = "<group>"; };
 		158FB964286FA56900A1F902 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
 		15997243287C3C6800832589 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		15997245287C4EE000832589 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 		1585AB012863D72C00957B30 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				158DC36728842BFB00D4B2E1 /* Profile Screen */,
 				15BAA069286A175600B26884 /* LoginRegisterScreens */,
 				15BAA06A286A178D00B26884 /* MainMessageScreen */,
 				15B36CD6286E6F1700E2ECB9 /* NewMessageScreen */,
@@ -171,6 +176,15 @@
 				15BF462C287CF580009196F6 /* RecentMessage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		158DC36728842BFB00D4B2E1 /* Profile Screen */ = {
+			isa = PBXGroup;
+			children = (
+				158DC36828842C1100D4B2E1 /* ProfileScreen.swift */,
+				158DC36A2884372600D4B2E1 /* PhotoScreen.swift */,
+			);
+			path = "Profile Screen";
 			sourceTree = "<group>";
 		};
 		15B36CD6286E6F1700E2ECB9 /* NewMessageScreen */ = {
@@ -312,12 +326,14 @@
 				15180B45287387CB001F3194 /* ContentView.swift in Sources */,
 				15B36CDA286E756100E2ECB9 /* NewMessageScreenViewModel.swift in Sources */,
 				1585AB122863DECB00957B30 /* User.swift in Sources */,
+				158DC36B2884372600D4B2E1 /* PhotoScreen.swift in Sources */,
 				15BAA06E286A22E100B26884 /* CustomNavBar.swift in Sources */,
 				152549512878891700CBD016 /* ChatMessage.swift in Sources */,
 				15BAA06C286A17D600B26884 /* MainMessagesScreen.swift in Sources */,
 				1585AB032863D87A00957B30 /* LoginScreen.swift in Sources */,
 				15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */,
 				1585AB0A2863DA0E00957B30 /* CustomTextField.swift in Sources */,
+				158DC36928842C1100D4B2E1 /* ProfileScreen.swift in Sources */,
 				1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */,
 				15BAA074286A3E4400B26884 /* MainMessagesViewModel.swift in Sources */,
 			);

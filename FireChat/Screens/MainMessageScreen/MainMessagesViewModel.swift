@@ -17,6 +17,8 @@ class MainMessagesViewModel: ObservableObject {
     @Published var isUserLoggedOut = false
     @Published var isNavigationLinkActive = false
     @Published var recentMessages = [RecentMessage]()
+    @Published var isProgressContinues = false
+    @Published var isPhotoLoading = false
     
     private var firestoreListeener: ListenerRegistration?
     
@@ -27,6 +29,7 @@ class MainMessagesViewModel: ObservableObject {
         fetchCurrentUser()
     }
     func loginUser(email: String, password: String) {
+        isProgressContinues = true
         FireBaseManager.shared.auth.signIn(withEmail: email, password: password) { res, err in
             if let err = err {
                 print("Failed to login. \(err)")
@@ -34,9 +37,7 @@ class MainMessagesViewModel: ObservableObject {
             }
             self.fetchCurrentUser()
             print("Succesfully logged in.")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.isUserLoggedOut = false
-            }
         }
     }
     func signOut() {
@@ -49,6 +50,7 @@ class MainMessagesViewModel: ObservableObject {
         isUserLoggedOut = true
     }
     func createNewAccount(email: String, password: String, image: UIImage?) {
+        isProgressContinues = true
         if image == nil {
             print("You need to select an image")
             return
@@ -62,7 +64,8 @@ class MainMessagesViewModel: ObservableObject {
             print("Successfully created user: \(result?.user.uid ?? "")")
         }
     }
-    private func saveImageToStorage(email: String,password: String, image: UIImage) {
+     func saveImageToStorage(email: String,password: String, image: UIImage) {
+         self.isPhotoLoading = true
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = FireBaseManager.shared.storage.reference(withPath: uid)
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
@@ -93,9 +96,7 @@ class MainMessagesViewModel: ObservableObject {
             }
             print("Succesfully user data is stored!")
             self.fetchCurrentUser()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.isUserLoggedOut = false
-            }
+            self.isUserLoggedOut = false
         }
     }
     private func fetchCurrentUser() {
@@ -115,6 +116,8 @@ class MainMessagesViewModel: ObservableObject {
             self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl)
             FireBaseManager.shared.currentUser = self.currentUser
         }
+        self.isPhotoLoading = false
+
     }
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
@@ -143,5 +146,27 @@ class MainMessagesViewModel: ObservableObject {
                     }
                 })
             }
+    }
+    func deleteAccount() {
+        guard let user = FireBaseManager.shared.auth.currentUser else { return }
+        self.deleteDeletedAccountInfoFromFireStore()
+        user.delete { err in
+            if let err = err {
+                print("Failed to delete account")
+                return
+            }
+            print("Account successfully deleted.")
+            self.isUserLoggedOut = true
+        }
+    }
+    func deleteDeletedAccountInfoFromFireStore() {
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+        FireBaseManager.shared.firestore.collection("users").document(uid).delete { err in
+            if let err = err {
+                print("Failed to delete data from firestore")
+                return
+            }
+            print("Account data successfully deleted from firestore.")
+        }
     }
 }

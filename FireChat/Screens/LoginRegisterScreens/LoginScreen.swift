@@ -23,7 +23,7 @@ struct LoginScreen: View {
             .padding()
             CustomTextField(prompt: "Email", text: $user.email)                .keyboardType(.emailAddress)
             CustomSecureField(prompt: "Password", text: $user.password)
-            
+
             Button {
                 viewModel.loginUser(email: user.email, password: user.password)
             } label: {
@@ -36,6 +36,18 @@ struct LoginScreen: View {
             }
             Spacer()
         }
+        .onDisappear(perform: {
+            viewModel.isProgressContinues = false
+        })
+        .overlay(content: {
+            if viewModel.isProgressContinues {
+                ProgressView()
+                    .tint(.fire)
+                    .scaleEffect(x: 3, y: 3, anchor: .center)
+                    .offset(y: -50)
+            }
+     
+        })
     }
 }
 

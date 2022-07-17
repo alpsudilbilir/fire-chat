@@ -9,8 +9,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ChatScreen: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let user: User?
     @FocusState private var keyboardState: Bool
+
     
     init(user: User) {
         self.user = user
@@ -22,13 +24,34 @@ struct ChatScreen: View {
     
     var body: some View {
         VStack {
+            navbarView
             messageView
             bottomBar
-        }
-        .navigationTitle(user?.username ?? "")
+        }.onChange(of: vm.messageText, perform: { newValue in
+            if !vm.messageText.isEmpty {
+                vm.isSendButtonDisabled = false
+            } else {
+                vm.isSendButtonDisabled = true
+            }
+        })
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+        .navigationBarHidden(true)
+        .onDisappear {
+            vm.snapshotListener?.remove()
+        }
+    }
+    private var navbarView: some View {
+        HStack {
+            Button {
+                self.presentationMode.wrappedValue.dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.fire)
+            }
+            Spacer().frame(width: 75)
+            NavigationLink {
+                PhotoScreen(imageURL: user?.imageUrl ?? "", isEditButtonAvailable: false)
+            } label: {
                 WebImage(url: URL(string: user?.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
                     .resizable()
                     .scaledToFill()
@@ -37,10 +60,11 @@ struct ChatScreen: View {
                     .clipped()
                     .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             }
-        }
-        .onDisappear {
-            vm.snapshotListener?.remove()
-        }
+
+           
+            Text(user?.username ?? "")
+            Spacer()
+        }.padding(.horizontal)
     }
     private var messageView: some View {
         ScrollView {

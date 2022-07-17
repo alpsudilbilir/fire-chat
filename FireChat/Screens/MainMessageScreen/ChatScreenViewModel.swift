@@ -19,8 +19,10 @@ class ChatScreenViewModel: ObservableObject {
     var recipientUser: User?
     var snapshotListener: ListenerRegistration?
     
+    
     init(user: User) {
         self.recipientUser = user
+        self.isSendButtonDisabled = messageText.isEmpty
     }
     
     func fetchMessages() {

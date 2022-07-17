@@ -22,6 +22,7 @@ struct RegisterScreen: View {
                 Spacer()
             }
             .padding()
+            
             Button {
                 showImagePicker.toggle()
             } label: {
@@ -43,8 +44,10 @@ struct RegisterScreen: View {
                     }
                 }
             }
+        
             CustomTextField(prompt: "Email", text: $user.email)
-                .keyboardType(.emailAddress)
+                    .keyboardType(.emailAddress)
+            
             CustomSecureField(prompt: "Password", text: $user.password)
             Button {
                 viewModel.createNewAccount(email: user.email, password: user.password, image: image ?? nil)
@@ -57,6 +60,18 @@ struct RegisterScreen: View {
                     .padding()
             }
         }
+        .onDisappear(perform: {
+            viewModel.isProgressContinues = false
+        })
+        .overlay(content: {
+            if viewModel.isProgressContinues {
+                ProgressView()
+                    .tint(.fire)
+                    .scaleEffect(x: 3, y: 3, anchor: .center)
+                    .offset(y: -50)
+            }
+     
+        })
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(image: $image)
         }
