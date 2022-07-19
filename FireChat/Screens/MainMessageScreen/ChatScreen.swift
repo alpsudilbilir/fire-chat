@@ -32,7 +32,7 @@ struct ChatScreen: View {
                 if let image = image {
                     Image(uiImage: image)
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                 }
             } else {
                 messageView
@@ -49,7 +49,7 @@ struct ChatScreen: View {
             ImagePicker(image: $image)
                 .onDisappear {
                     if let image = image {
-                        print(image.description)
+                        vm.saveChatImageToStorage(image: image)
                     }
                 }
         })
@@ -145,12 +145,12 @@ struct ChatScreen: View {
             
             Button {
                 isUserSendingImage = false
-                vm.handleSend()
+                vm.handleSend(imageUrl: vm.imageUrl)
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .font(.system(size: 32))
-                    .foregroundColor(vm.isSendButtonDisabled ? .gray : .fire)
-            }.disabled(vm.isSendButtonDisabled)
+                    .foregroundColor(vm.checkSendButton()  ? .gray : .fire)
+            }.disabled(vm.checkSendButton())
             Spacer()
         }
     }

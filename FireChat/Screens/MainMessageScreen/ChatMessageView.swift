@@ -6,14 +6,27 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 struct ChatMessageView: View {
     let message: ChatMessage
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack {
+            
             if message.fromId == FireBaseManager.shared.auth.currentUser?.uid {
+                
+                if  message.imageUrl != nil {
+                    HStack {
+                        Spacer()
+                        WebImage(url: URL(string: message.imageUrl!))
+                            .resizable()
+                            .frame(width: 200, height: 250)
+                            .cornerRadius(25)
+                            .padding(.horizontal)
+                    }
+                }
+                
                 HStack {
                     Spacer()
                     
@@ -30,6 +43,19 @@ struct ChatMessageView: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
             } else {
+                if  message.imageUrl != nil {
+                    HStack {
+                        WebImage(url: URL(string: message.imageUrl!))
+                            .resizable()
+                            .frame(width: 200, height: 250)
+                            .cornerRadius(25)
+                            .padding(.horizontal)
+                        Spacer()
+                        
+                    }
+                    
+                    
+                }
                 HStack {
                     HStack {
                         Text(message.message)
