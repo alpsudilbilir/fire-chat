@@ -33,9 +33,7 @@ struct PhotoScreen: View {
                         .scaleEffect(x: 3, y: 3, anchor: .center)
                         .offset(y: -50)
                 }
-                
             })
-            
         }
         .sheet(isPresented: $showPicker, content: {
             ImagePicker(image: $image)
@@ -77,5 +75,6 @@ struct PhotoScreen: View {
 struct PhotoScreen_Previews: PreviewProvider {
     static var previews: some View {
         PhotoScreen(imageURL: "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png")
+            .environmentObject(MainMessagesViewModel())
     }
 }

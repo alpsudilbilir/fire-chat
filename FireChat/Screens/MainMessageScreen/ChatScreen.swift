@@ -12,6 +12,9 @@ struct ChatScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let user: User?
     @FocusState private var keyboardState: Bool
+    @State var image: UIImage?
+    @State var showImagePickerSheet = false
+    @State var isUserSendingImage = false
 
     
     init(user: User) {
@@ -25,7 +28,15 @@ struct ChatScreen: View {
     var body: some View {
         VStack {
             navbarView
-            messageView
+            if isUserSendingImage {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                }
+            } else {
+                messageView
+            }
             bottomBar
         }.onChange(of: vm.messageText, perform: { newValue in
             if !vm.messageText.isEmpty {
@@ -33,6 +44,14 @@ struct ChatScreen: View {
             } else {
                 vm.isSendButtonDisabled = true
             }
+        })
+        .sheet(isPresented: $showImagePickerSheet, content: {
+            ImagePicker(image: $image)
+                .onDisappear {
+                    if let image = image {
+                        print(image.description)
+                    }
+                }
         })
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(true)
@@ -63,6 +82,7 @@ struct ChatScreen: View {
 
            
             Text(user?.username ?? "")
+                .bold()
             Spacer()
         }.padding(.horizontal)
     }
@@ -100,10 +120,14 @@ struct ChatScreen: View {
         
         HStack {
             HStack(spacing: 3) {
-                Image(systemName: "photo.on.rectangle.angled")
-                    .font(.system(size: 32))
-                    .foregroundColor(.gray)
-                
+                Button {
+                    showImagePickerSheet = true
+                    isUserSendingImage = true
+                } label: {
+                    Image(systemName: "photo.on.rectangle.angled")
+                        .font(.system(size: 32))
+                        .foregroundColor(.gray)
+                }
                 TextEditor(text: $vm.messageText)
                     .frame(maxWidth: .infinity, minHeight: 32, idealHeight: 32, maxHeight: 32, alignment: .center)
                     .focused($keyboardState)
@@ -120,6 +144,7 @@ struct ChatScreen: View {
             }.padding(.horizontal)
             
             Button {
+                isUserSendingImage = false
                 vm.handleSend()
             } label: {
                 Image(systemName: "arrow.right.circle.fill")

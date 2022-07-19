@@ -43,7 +43,6 @@ class ChatScreenViewModel: ObservableObject {
                 querySnapshot?.documentChanges.forEach({ change in
                     if change.type == .added {
                         let data = change.document.data()
-                        
                         if let message = try? change.document.data(as: ChatMessage.self) {
                             self.messages.append(message)
                         }
