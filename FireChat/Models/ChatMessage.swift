@@ -13,5 +13,6 @@ struct ChatMessage:Codable, Identifiable {
     
     let fromId: String
     let toId: String
-    let message: String    
+    let message: String
+    let imageUrl: String?
 }
