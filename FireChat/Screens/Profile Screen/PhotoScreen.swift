@@ -15,9 +15,6 @@ struct PhotoScreen: View {
     @State var showPicker = false
     @State var image: UIImage?
     @State var isEditButtonAvailable = false
-    
-    
-    
     var body: some View {
         ZStack {
             VStack {

@@ -44,9 +44,8 @@ struct RegisterScreen: View {
                     }
                 }
             }
-        
             CustomTextField(prompt: "Email", text: $user.email)
-                    .keyboardType(.emailAddress)
+                .keyboardType(.emailAddress)
             
             CustomSecureField(prompt: "Password", text: $user.password)
             Button {
@@ -70,7 +69,6 @@ struct RegisterScreen: View {
                     .scaleEffect(x: 3, y: 3, anchor: .center)
                     .offset(y: -50)
             }
-     
         })
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(image: $image)

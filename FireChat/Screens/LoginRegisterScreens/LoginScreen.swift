@@ -23,7 +23,7 @@ struct LoginScreen: View {
             .padding()
             CustomTextField(prompt: "Email", text: $user.email)                .keyboardType(.emailAddress)
             CustomSecureField(prompt: "Password", text: $user.password)
-
+            
             Button {
                 viewModel.loginUser(email: user.email, password: user.password)
             } label: {
@@ -46,7 +46,6 @@ struct LoginScreen: View {
                     .scaleEffect(x: 3, y: 3, anchor: .center)
                     .offset(y: -50)
             }
-     
         })
     }
 }

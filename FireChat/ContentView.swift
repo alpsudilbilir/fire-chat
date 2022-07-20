@@ -14,7 +14,6 @@ struct ContentView: View {
             NavigationView{
                 MainMessagesScreen()
                     .environmentObject(viewModel)
-
             }
             .tabItem{
                 Text("Messages")

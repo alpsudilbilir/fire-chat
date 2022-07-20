@@ -17,7 +17,6 @@ struct ProfileScreen: View {
                 NavigationLink {
                     PhotoScreen(imageURL: imageURL, isEditButtonAvailable: true)
                         .environmentObject(viewModel)
-
                 } label: {
                     WebImage(url: URL(string: imageURL))
                         .resizable()
@@ -36,7 +35,6 @@ struct ProfileScreen: View {
             }
             Text(viewModel.currentUser?.username ?? "Unkown")
                 .font(.system(size: 36))
-            
             Spacer()
             Button {
                 showAlert = true
@@ -51,9 +49,7 @@ struct ProfileScreen: View {
                         .padding()
                     Spacer()
                 }.padding()
-                
             }
-
         }.padding(.vertical)
         .alert("Do you want to delete your account?", isPresented: $showAlert, actions: {
             Button(role: .cancel, action: {}) {
@@ -71,7 +67,6 @@ struct ProfileScreen: View {
         }
     }
 }
-
 struct ProfileScreen_Previews: PreviewProvider {
     static var previews: some View {
         ProfileScreen()

@@ -40,7 +40,7 @@ class MainMessagesViewModel: ObservableObject {
             }
             self.fetchCurrentUser()
             print("Succesfully logged in.")
-                self.isUserLoggedOut = false
+            self.isUserLoggedOut = false
         }
     }
     func signOut() {
@@ -71,8 +71,8 @@ class MainMessagesViewModel: ObservableObject {
             print("Successfully created user: \(result?.user.uid ?? "")")
         }
     }
-     func saveImageToStorage(email: String,password: String, image: UIImage) {
-         self.isPhotoLoading = true
+    func saveImageToStorage(email: String,password: String, image: UIImage) {
+        self.isPhotoLoading = true
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = FireBaseManager.shared.storage.reference(withPath: uid)
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
@@ -124,7 +124,7 @@ class MainMessagesViewModel: ObservableObject {
             FireBaseManager.shared.currentUser = self.currentUser
         }
         self.isPhotoLoading = false
-
+        
     }
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }

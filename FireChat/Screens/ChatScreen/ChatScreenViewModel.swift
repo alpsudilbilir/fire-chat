@@ -11,7 +11,6 @@ import UIKit
 
 
 class ChatScreenViewModel: ObservableObject {
-    
     @Published var messageText: String = ""
     @Published var messages = [ChatMessage]()
     @Published var placeholder = "Message"
@@ -20,8 +19,6 @@ class ChatScreenViewModel: ObservableObject {
     var imageUrl: URL?
     var recipientUser: User?
     var snapshotListener: ListenerRegistration?
-    
-    
     init(user: User) {
         self.recipientUser = user
         self.isSendButtonDisabled = messageText.isEmpty
@@ -58,7 +55,6 @@ class ChatScreenViewModel: ObservableObject {
             }
         }
     }
-    
     func fetchMessages() {
         guard let fromId = FireBaseManager.shared.auth.currentUser?.uid else { return } //Sending User
         guard let toId = recipientUser?.uid else { return } //Receiving User
@@ -99,8 +95,6 @@ class ChatScreenViewModel: ObservableObject {
             print("Successfully saved current user sending message!")
         }
         saveMessageForMainScreen()
-        
-        //Receiving user
         let receivedMessageDocument = FireBaseManager.shared.firestore.collection("messages").document(toId).collection(fromId).document()
         receivedMessageDocument.setData(messageData) { err in
             if let err = err {
@@ -114,12 +108,14 @@ class ChatScreenViewModel: ObservableObject {
     func saveMessageForMainScreen() {
         guard let fromId = FireBaseManager.shared.auth.currentUser?.uid else { return }
         guard let toId = self.recipientUser?.uid else { return }
+        /*----------------------------------------------------------
+         Save for current user
+         ----------------------------------------------------------*/
         let document = FireBaseManager.shared.firestore
             .collection("recent_messages")
             .document(fromId)
             .collection("recentMessages")
             .document(toId)
-        
         let data  = [
             "timestamp": Timestamp(),
             "message" : self.messageText,
@@ -128,7 +124,6 @@ class ChatScreenViewModel: ObservableObject {
             "imageUrl" : recipientUser?.imageUrl ?? "",
             "email" : recipientUser?.email
         ] as [String : Any]
-        
         document.setData(data) { err in
             if let err = err {
                 print("Failed to save recent messages \(err)")

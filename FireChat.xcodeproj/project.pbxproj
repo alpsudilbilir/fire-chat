@@ -30,7 +30,7 @@
 		158DC36928842C1100D4B2E1 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36828842C1100D4B2E1 /* ProfileScreen.swift */; };
 		158DC36B2884372600D4B2E1 /* PhotoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36A2884372600D4B2E1 /* PhotoScreen.swift */; };
 		158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158FB964286FA56900A1F902 /* ChatScreen.swift */; };
-		15997244287C3C6800832589 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15997243287C3C6800832589 /* ChatMessageView.swift */; };
+		15997244287C3C6800832589 /* ChatMessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15997243287C3C6800832589 /* ChatMessageScreen.swift */; };
 		15997246287C4EE000832589 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15997245287C4EE000832589 /* README.md */; };
 		15B36CD8286E6F3B00E2ECB9 /* NewMessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */; };
 		15B36CDA286E756100E2ECB9 /* NewMessageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */; };
@@ -62,7 +62,7 @@
 		158DC36828842C1100D4B2E1 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		158DC36A2884372600D4B2E1 /* PhotoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoScreen.swift; sourceTree = "<group>"; };
 		158FB964286FA56900A1F902 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
-		15997243287C3C6800832589 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		15997243287C3C6800832589 /* ChatMessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageScreen.swift; sourceTree = "<group>"; };
 		15997245287C4EE000832589 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageScreen.swift; sourceTree = "<group>"; };
 		15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageScreenViewModel.swift; sourceTree = "<group>"; };
@@ -140,9 +140,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		155802B72888AA1A00B28294 /* ChatScreen */ = {
+			isa = PBXGroup;
+			children = (
+				158FB964286FA56900A1F902 /* ChatScreen.swift */,
+				150E820D28778D790044A82D /* ChatScreenViewModel.swift */,
+				15997243287C3C6800832589 /* ChatMessageScreen.swift */,
+			);
+			path = ChatScreen;
+			sourceTree = "<group>";
+		};
 		1585AB012863D72C00957B30 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				155802B72888AA1A00B28294 /* ChatScreen */,
 				158DC36728842BFB00D4B2E1 /* Profile Screen */,
 				15BAA069286A175600B26884 /* LoginRegisterScreens */,
 				15BAA06A286A178D00B26884 /* MainMessageScreen */,
@@ -151,13 +162,13 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		1585AB042863D91400957B30 /* StartScreenSubViews */ = {
+		1585AB042863D91400957B30 /* LoginRegisterSubItems */ = {
 			isa = PBXGroup;
 			children = (
 				1585AB052863D94200957B30 /* CustomSecureField.swift */,
 				1585AB092863DA0E00957B30 /* CustomTextField.swift */,
 			);
-			path = StartScreenSubViews;
+			path = LoginRegisterSubItems;
 			sourceTree = "<group>";
 		};
 		1585AB0B2863DC0200957B30 /* Extensions */ = {
@@ -202,7 +213,7 @@
 				153382CA2863CB9D00CACE3C /* LoginRegisterScreen.swift */,
 				1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */,
 				1585AB022863D87A00957B30 /* LoginScreen.swift */,
-				1585AB042863D91400957B30 /* StartScreenSubViews */,
+				1585AB042863D91400957B30 /* LoginRegisterSubItems */,
 			);
 			path = LoginRegisterScreens;
 			sourceTree = "<group>";
@@ -214,9 +225,6 @@
 				15BAA06B286A17D600B26884 /* MainMessagesScreen.swift */,
 				15BAA06F286A247000B26884 /* MessageItem.swift */,
 				15BAA06D286A22E100B26884 /* CustomNavBar.swift */,
-				158FB964286FA56900A1F902 /* ChatScreen.swift */,
-				150E820D28778D790044A82D /* ChatScreenViewModel.swift */,
-				15997243287C3C6800832589 /* ChatMessageView.swift */,
 			);
 			path = MainMessageScreen;
 			sourceTree = "<group>";
@@ -315,7 +323,7 @@
 				15B36CD8286E6F3B00E2ECB9 /* NewMessageScreen.swift in Sources */,
 				151A33D72865F245005F039B /* FireBaseManager.swift in Sources */,
 				1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */,
-				15997244287C3C6800832589 /* ChatMessageView.swift in Sources */,
+				15997244287C3C6800832589 /* ChatMessageScreen.swift in Sources */,
 				15BAA070286A247000B26884 /* MessageItem.swift in Sources */,
 				153382CB2863CB9D00CACE3C /* LoginRegisterScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,

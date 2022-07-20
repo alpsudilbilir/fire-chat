@@ -11,7 +11,7 @@ struct LoginRegisterScreen: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
     let screens = ["Login", "Register"]
     @State private var selectedScreen = "Login"
-
+    
     var body: some View {
         ScrollView {
             Picker("Select your screen", selection: $selectedScreen) {
@@ -42,13 +42,10 @@ struct LoginRegisterScreen: View {
             Button(role: .none, action: { viewModel.showLoginAlert = false }) {
                 Text("Try again")
                     .foregroundColor(.fire)
-
             }
         } message: {
             Text("Invalid email or password")
         }
-   
-
     }
     private func customizePicker() {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(.fire)

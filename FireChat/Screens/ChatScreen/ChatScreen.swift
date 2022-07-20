@@ -91,7 +91,7 @@ struct ChatScreen: View {
             ScrollViewReader { reader in
                 VStack {
                     ForEach(vm.messages) { message in
-                        ChatMessageView(message: message)
+                        ChatMessageScreen(message: message)
                             .onChange(of: vm.messages.count) { newValue in
                                 withAnimation(.easeOut(duration: 0.5)) {
                                     reader.scrollTo("bottom", anchor: .bottom)
