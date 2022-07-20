@@ -15,7 +15,7 @@ struct ChatScreen: View {
     @State var image: UIImage?
     @State var showImagePickerSheet = false
     @State var isUserSendingImage = false
-
+    
     
     init(user: User) {
         self.user = user
@@ -79,8 +79,8 @@ struct ChatScreen: View {
                     .clipped()
                     .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             }
-
-           
+            
+            
             Text(user?.username ?? "")
                 .bold()
             Spacer()
@@ -115,7 +115,7 @@ struct ChatScreen: View {
             vm.placeholder = "Message"
         }
     }
-
+    
     private var bottomBar: some View {
         
         HStack {

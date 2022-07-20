@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 struct ChatMessageView: View {
     let message: ChatMessage
     @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
         VStack {
             
@@ -21,7 +21,7 @@ struct ChatMessageView: View {
                         Spacer()
                         WebImage(url: URL(string: message.imageUrl!))
                             .resizable()
-                            .frame(width: 200, height: 250)
+                            .frame(width: 250, height: 300)
                             .cornerRadius(25)
                             .padding(.horizontal)
                     }
@@ -47,7 +47,7 @@ struct ChatMessageView: View {
                     HStack {
                         WebImage(url: URL(string: message.imageUrl!))
                             .resizable()
-                            .frame(width: 200, height: 250)
+                            .frame(width: 250, height: 300)
                             .cornerRadius(25)
                             .padding(.horizontal)
                         Spacer()

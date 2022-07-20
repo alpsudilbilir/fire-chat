@@ -19,7 +19,8 @@ class MainMessagesViewModel: ObservableObject {
     @Published var recentMessages = [RecentMessage]()
     @Published var isProgressContinues = false
     @Published var isPhotoLoading = false
-    
+    @Published var showLoginAlert = false
+    @Published var showRegistirationAlert = false
     private var firestoreListeener: ListenerRegistration?
     
     init() {
@@ -29,10 +30,12 @@ class MainMessagesViewModel: ObservableObject {
         fetchCurrentUser()
     }
     func loginUser(email: String, password: String) {
-        isProgressContinues = true
+        self.isProgressContinues = true
         FireBaseManager.shared.auth.signIn(withEmail: email, password: password) { res, err in
             if let err = err {
                 print("Failed to login. \(err)")
+                self.showLoginAlert = true
+                self.isProgressContinues = false
                 return
             }
             self.fetchCurrentUser()
@@ -50,14 +53,18 @@ class MainMessagesViewModel: ObservableObject {
         isUserLoggedOut = true
     }
     func createNewAccount(email: String, password: String, image: UIImage?) {
-        isProgressContinues = true
+        self.isProgressContinues = true
         if image == nil {
             print("You need to select an image")
+            self.showRegistirationAlert = true
+            self.isProgressContinues = false
             return
         }
         FireBaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
             if let err = err {
                 print("Failed to create user:", err)
+                self.showRegistirationAlert = true
+                self.isProgressContinues = false
                 return
             }
             self.saveImageToStorage(email: email, password: password, image: image!)
