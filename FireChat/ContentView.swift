@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
+    @EnvironmentObject var vm: ProfileScreenViewModel
     var body: some View {
         TabView {
             NavigationView{
                 MainMessagesScreen()
                     .environmentObject(viewModel)
+                    .environmentObject(vm)
             }
             .tabItem{
                 Text("Messages")
@@ -25,6 +27,7 @@ struct ContentView: View {
                     .transition(.move(edge: .bottom))
                     .accentColor(Color.fire)
                     .environmentObject(viewModel)
+                    .environmentObject(vm)
             }
             .tabItem {
                 Text("Profile")

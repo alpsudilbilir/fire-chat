@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 struct ProfileScreen: View {
     @EnvironmentObject var viewModel: MainMessagesViewModel
-    @State var showAlert = false
+    @EnvironmentObject var vm: ProfileScreenViewModel
     var body: some View {
         VStack {
             if let imageURL = viewModel.currentUser?.imageUrl {
@@ -36,22 +36,20 @@ struct ProfileScreen: View {
             Text(viewModel.currentUser?.username ?? "Unkown")
                 .font(.system(size: 36))
             Spacer()
-            Button {
-                showAlert = true
-            } label: {
-                HStack {
-                    Text("Delete Account")
-                        .bold()
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.fire)
-                        .cornerRadius(50)
-                        .padding()
-                    Spacer()
-                }.padding()
+            HStack {
+                Text("Settings")
+                    .bold()
+                    .font(.title2)
+                    .foregroundColor(.fire)
+                Spacer()
             }
-        }.padding(.vertical)
-        .alert("Do you want to delete your account?", isPresented: $showAlert, actions: {
+            .padding(.horizontal)
+            
+            SettingsListView()
+                .environmentObject(vm)
+            
+        }
+        .alert("Do you want to delete your account?", isPresented: $vm.showDeleteAccountAlert, actions: {
             Button(role: .cancel, action: {}) {
                 Text("Cancel")
             }
@@ -73,3 +71,5 @@ struct ProfileScreen_Previews: PreviewProvider {
             .environmentObject(MainMessagesViewModel())
     }
 }
+
+
