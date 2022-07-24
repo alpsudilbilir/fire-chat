@@ -8,7 +8,7 @@
 import Foundation
 
 final class ProfileScreenViewModel: ObservableObject {
-    @Published var isDarkModeOff: Bool  = true
+    @Published var isDarkModeOn: Bool  = false
     @Published var favoriteMessages = [String]()
     @Published var selected = "online"
     @Published var showDeleteAccountAlert = false
@@ -16,7 +16,6 @@ final class ProfileScreenViewModel: ObservableObject {
 
     
     init() {
-        self.isDarkModeOff = UserDefaultService.shared.getTheme()
-        print(isDarkModeOff)
+        self.isDarkModeOn = UserDefaultService.shared.getTheme()
     }
 }
