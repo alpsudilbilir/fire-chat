@@ -10,12 +10,11 @@ import SDWebImageSwiftUI
 
 
 struct MessageItem: View {
-    @ObservedObject var viewModel = MainMessagesViewModel()
+    @EnvironmentObject var viewModel : MainMessagesViewModel
     let didSelectUser: (User?) -> ()
     
     init(didSelectUser: @escaping (User?) -> () ) {
         self.didSelectUser = didSelectUser
-        viewModel.fetchRecentMessages()
     }
 
     
@@ -59,6 +58,9 @@ struct MessageItem: View {
                 .foregroundColor(.primary)
             }
 
+
+        }.onAppear {
+            viewModel.fetchRecentMessages()
 
         }
     }

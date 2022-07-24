@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainMessagesScreen: View {
+    @EnvironmentObject var vm: ProfileScreenViewModel
     @EnvironmentObject var viewModel: MainMessagesViewModel
     var body: some View {
         VStack {
@@ -20,9 +21,12 @@ struct MainMessagesScreen: View {
             if let user = viewModel.userThatWillBeMessaged {
                 NavigationLink("", isActive: $viewModel.isNavigationLinkActive) {
                     ChatScreen(user: user)
+                        .environmentObject(vm)
                 }
             }
         }
+        .environmentObject(vm
+        )
         .environmentObject(viewModel)
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, onDismiss: nil) {
