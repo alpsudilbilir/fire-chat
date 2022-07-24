@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ChatScreen: View {
+    @EnvironmentObject var profileVm: ProfileScreenViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let user: User?
     @FocusState private var keyboardState: Bool
@@ -20,6 +21,7 @@ struct ChatScreen: View {
     init(user: User) {
         self.user = user
         self.vm = .init(user: user)
+        vm.fetchMessages()
     }
     
     @ObservedObject var vm : ChatScreenViewModel
@@ -104,9 +106,6 @@ struct ChatScreen: View {
                     HStack {
                         Spacer()
                     }.id("bottom")
-                }
-                .onAppear {
-                    vm.fetchMessages()
                 }
             }
         }

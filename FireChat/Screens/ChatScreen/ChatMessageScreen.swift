@@ -8,8 +8,13 @@
 import SwiftUI
 import SDWebImageSwiftUI
 struct ChatMessageScreen: View {
-    let message: ChatMessage
+    @EnvironmentObject var vm : ProfileScreenViewModel
     @Environment(\.colorScheme) var colorScheme
+
+    let message: ChatMessage
+    @State var showMessageDialog = false
+    @State var selectedImage: Image?
+    @State var selectedMessage: String?
     
     var body: some View {
         VStack {
@@ -22,6 +27,9 @@ struct ChatMessageScreen: View {
                             .frame(width: 250, height: 300)
                             .cornerRadius(25)
                             .padding(.horizontal)
+                            .onLongPressGesture {
+                                    showMessageDialog.toggle()
+                            }
                     }
                 }
                 HStack {
@@ -29,6 +37,10 @@ struct ChatMessageScreen: View {
                     HStack {
                         Text(message.message)
                             .foregroundColor(.white)
+                            .onLongPressGesture {
+                                showMessageDialog.toggle()
+                                selectedMessage = message.message
+                            }
                     }
                     .padding()
                     .background(Color.fire)
@@ -45,6 +57,9 @@ struct ChatMessageScreen: View {
                             .frame(width: 250, height: 300)
                             .cornerRadius(25)
                             .padding(.horizontal)
+                            .onLongPressGesture {
+                                showMessageDialog.toggle()
+                            }
                         Spacer()
                     }
                 }
@@ -52,6 +67,11 @@ struct ChatMessageScreen: View {
                     HStack {
                         Text(message.message)
                             .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .onLongPressGesture {
+                                showMessageDialog.toggle()
+                                selectedMessage = message.message
+
+                            }
                     }
                     .padding()
                     .background(colorScheme == .dark ? .ultraThinMaterial : .thin)
@@ -62,6 +82,14 @@ struct ChatMessageScreen: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
             }
+        }
+        .confirmationDialog("", isPresented: $showMessageDialog) {
+            Button(role: .none) {
+                vm.favoriteMessages.insert(selectedMessage!, at: 0)
+            } label: {
+                Text("Add to favorites")
+            }
+
         }
     }
 }
