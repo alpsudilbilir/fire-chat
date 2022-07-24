@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct FavoriteMessage: Codable {
+    var fromWho: String
+    var message: String
+}
