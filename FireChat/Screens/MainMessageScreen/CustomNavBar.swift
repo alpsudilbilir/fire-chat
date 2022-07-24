@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct CustomNavBar: View {
+    @EnvironmentObject var vm: ProfileScreenViewModel
     @EnvironmentObject var viewModel: MainMessagesViewModel
     @State var showNewMessageScreen = false
     @State var showConfirmationDialog = false
@@ -28,7 +29,7 @@ struct CustomNavBar: View {
                     Circle()
                         .foregroundColor(.green)
                         .frame(width: 8, height: 8)
-                    Text("online")
+                    Text(vm.selected)
                         .foregroundColor(Color.gray)
                         .font(.caption)
                 }
@@ -73,5 +74,6 @@ struct CustomNavBar_Previews: PreviewProvider {
     static var previews: some View {
         CustomNavBar()
             .environmentObject(MainMessagesViewModel())
+            .environmentObject(ProfileScreenViewModel())
     }
 }
