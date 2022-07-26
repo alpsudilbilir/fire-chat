@@ -45,6 +45,9 @@ class MainMessagesViewModel: ObservableObject {
     }
     func signOut() {
         do {
+            self.currentUser = nil
+            FireBaseManager.shared.currentUser = nil
+            self.recentMessages = []
             try FireBaseManager.shared.auth.signOut()
             print("Successfuly signed out")
         } catch {
@@ -124,7 +127,6 @@ class MainMessagesViewModel: ObservableObject {
             FireBaseManager.shared.currentUser = self.currentUser
         }
         self.isPhotoLoading = false
-        
     }
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
@@ -149,7 +151,6 @@ class MainMessagesViewModel: ObservableObject {
                     }
                     if let recentMessage = try? change.document.data(as: RecentMessage.self) {
                         self.recentMessages.insert(recentMessage, at: 0)
-                        
                     }
                 })
             }

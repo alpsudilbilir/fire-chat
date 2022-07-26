@@ -25,13 +25,15 @@ struct MainMessagesScreen: View {
                 }
             }
         }
-        .environmentObject(vm
-        )
+        .environmentObject(vm)
         .environmentObject(viewModel)
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, onDismiss: nil) {
             LoginRegisterScreen()
                 .environmentObject(viewModel)
+                .onDisappear {
+                    viewModel.fetchRecentMessages()
+                }
         }
     }
 }

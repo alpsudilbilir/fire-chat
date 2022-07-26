@@ -24,7 +24,8 @@ struct ChatMessageScreen: View {
                         Spacer()
                         WebImage(url: URL(string: message.imageUrl!))
                             .resizable()
-                            .frame(width: 250, height: 300)
+                            .frame(width: 300, height: 300)
+                            .scaledToFit()
                             .cornerRadius(25)
                             .padding(.horizontal)
                             .onLongPressGesture {
@@ -54,7 +55,8 @@ struct ChatMessageScreen: View {
                     HStack {
                         WebImage(url: URL(string: message.imageUrl!))
                             .resizable()
-                            .frame(width: 250, height: 300)
+                            .frame(width: 300, height: 300)
+                            .scaledToFit()
                             .cornerRadius(25)
                             .padding(.horizontal)
                             .onLongPressGesture {
