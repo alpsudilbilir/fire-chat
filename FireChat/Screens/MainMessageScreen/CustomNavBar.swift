@@ -27,9 +27,9 @@ struct CustomNavBar: View {
                     .font(.system(size: 24, weight: .semibold))
                 HStack {
                     Circle()
-                        .foregroundColor(.green)
+                        .foregroundColor(Color.statusColor(status: viewModel.currentUser?.status ?? ""))
                         .frame(width: 8, height: 8)
-                    Text(vm.selected)
+                    Text(viewModel.currentUser?.status ?? "")
                         .foregroundColor(Color.gray)
                         .font(.caption)
                 }

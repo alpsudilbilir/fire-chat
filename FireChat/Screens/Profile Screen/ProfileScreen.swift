@@ -47,6 +47,7 @@ struct ProfileScreen: View {
             
             SettingsListView()
                 .environmentObject(vm)
+                .environmentObject(viewModel)
             
         }
         .alert("Do you want to delete your account?", isPresented: $vm.showDeleteAccountAlert, actions: {

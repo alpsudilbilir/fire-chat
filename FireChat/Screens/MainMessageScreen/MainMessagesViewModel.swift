@@ -95,9 +95,10 @@ class MainMessagesViewModel: ObservableObject {
             }
         }
     }
+    //Only used in registiration process.
     private func saveUserInfo(email: String,password: String, imageUrl: URL) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString]
+        let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString, "status": ""]
         
         FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
             if let err = err {
@@ -109,7 +110,7 @@ class MainMessagesViewModel: ObservableObject {
             self.isUserLoggedOut = false
         }
     }
-    private func fetchCurrentUser() {
+     func fetchCurrentUser() {
         guard let uid =  FireBaseManager.shared.auth.currentUser?.uid else { return }
         FireBaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, err in
             if let err = err {
@@ -123,7 +124,8 @@ class MainMessagesViewModel: ObservableObject {
             let uid = data["uid"] as? String ?? ""
             let email = data["email"] as? String ?? ""
             let imageUrl = data["imageUrl"] as? String ?? ""
-            self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl)
+            let status = data["status"] as? String ?? ""
+            self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl, status: status)
             FireBaseManager.shared.currentUser = self.currentUser
         }
         self.isPhotoLoading = false

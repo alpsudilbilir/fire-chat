@@ -8,23 +8,34 @@
 import SwiftUI
 
 struct SettingsListView: View {
+    @EnvironmentObject var viewModel: MainMessagesViewModel
     @EnvironmentObject var vm : ProfileScreenViewModel
+    
     var body: some View {
         List {
             darkModeToggle
             HStack {
                 Text("Status")
                 Spacer()
-                Picker("", selection: $vm.selected) {
+                Picker("", selection: $vm.selectedStatus) {
                     ForEach(vm.statusSelections, id: \.self) {
                         Text($0)
                             .foregroundColor(.black)
                     }
                 }.pickerStyle(.menu)
+                    .onChange(of: vm.selectedStatus) { newValue in
+                        vm.saveUserStatusToFireStore()
+                        print(vm.selectedStatus + "setted.")
+                        viewModel.fetchCurrentUser()
+                    }
+                
             }
             favoriteMessages
             deleteAccountButton
         }
+        .onAppear(perform: {
+            vm.selectedStatus = viewModel.currentUser?.status ?? ""
+        })
         .hasScrollEnabled(false)
         .listStyle(.plain)
     }

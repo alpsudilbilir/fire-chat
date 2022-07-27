@@ -8,14 +8,23 @@
 import Foundation
 
 final class ProfileScreenViewModel: ObservableObject {
+    let statusSelections = ["online", "offline", "busy"]
+
     @Published var isDarkModeOn: Bool  = false
     @Published var favoriteMessages = [String]()
-    @Published var selected = "online"
+    @Published var selectedStatus = "online"
     @Published var showDeleteAccountAlert = false
-    let statusSelections = ["online", "offline", "unavailable"]
 
     
     init() {
         self.isDarkModeOn = UserDefaultService.shared.getTheme()
+    }
+    
+    func saveUserStatusToFireStore() {
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+        FireBaseManager.shared.firestore
+            .collection("users")
+            .document(uid)
+            .setData(["status": self.selectedStatus], merge: true)
     }
 }
