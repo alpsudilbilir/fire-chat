@@ -22,6 +22,7 @@ struct ChatScreen: View {
         self.user = user
         self.vm = .init(user: user)
         vm.fetchMessages()
+        vm.fetchUserStatus(uid: user.uid)
     }
     
     @ObservedObject var vm : ChatScreenViewModel
@@ -40,7 +41,11 @@ struct ChatScreen: View {
                 messageView
             }
             bottomBar
-        }.onChange(of: vm.messageText, perform: { newValue in
+        }
+        .onAppear(perform: {
+//            vm.fetchUserStatus(uid: vm.recipientUser?.uid ?? "")
+        })
+        .onChange(of: vm.messageText, perform: { newValue in
             if !vm.messageText.isEmpty {
                 vm.isSendButtonDisabled = false
             } else {
@@ -82,11 +87,21 @@ struct ChatScreen: View {
                     .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             }
             
-            
-            Text(user?.username ?? "")
-                .bold()
+            VStack(alignment: .leading, spacing: 3) {
+                Text(user?.username ?? "")
+                    .bold()
+                HStack(spacing: 3) {
+                    Circle()
+                        .foregroundColor(Color.statusColor(status: vm.userStatus ))
+                        .frame(width: 8, height: 8)
+                    Text(vm.userStatus ?? "")
+                        .font(.caption)
+                }
+            }
             Spacer()
-        }.padding(.horizontal)
+        }
+        .padding(.horizontal)
+        
     }
     private var messageView: some View {
         ScrollView {

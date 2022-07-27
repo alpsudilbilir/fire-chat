@@ -28,14 +28,23 @@ struct NewMessageScreen: View {
                             dismiss.wrappedValue.dismiss()
                             didSelectNewUser(user)
                         } label: {
-                            Text(user.username)
-                                .font(.title3)
-                                .foregroundColor(Color(.label))
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(user.username)
+                                    .font(.title3)
+                                    .foregroundColor(Color(.label))
+                                HStack {
+                                    Circle()
+                                        .foregroundColor(Color.statusColor(status: user.status))
+                                        .frame(width: 8, height: 8)
+                                    Text(user.status)
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
+                            }
                         }
                         Spacer()
                     }
                     .padding(.horizontal)
-                    .padding(.vertical, 5)
                     Divider()
                 }
                 .navigationTitle("Users")
@@ -58,7 +67,7 @@ struct NewMessageScreen: View {
 
 struct NewMessageScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NewMessageScreen(didSelectNewUser: { _ in 
+        NewMessageScreen(didSelectNewUser: { _ in
             
         })
     }

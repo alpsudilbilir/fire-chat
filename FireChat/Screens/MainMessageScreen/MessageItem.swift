@@ -34,7 +34,7 @@ struct MessageItem: View {
                                 .cornerRadius(64)
                                 .clipped()
                                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
-                            VStack(alignment: .leading, spacing: 5) {
+                            VStack(alignment: .leading, spacing: 3) {
                                 Text(recentMessage.username)
                                     .font(.title3)
                                     .fontWeight(.semibold)

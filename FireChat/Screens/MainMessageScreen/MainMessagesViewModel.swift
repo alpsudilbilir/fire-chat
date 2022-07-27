@@ -98,7 +98,7 @@ class MainMessagesViewModel: ObservableObject {
     //Only used in registiration process.
     private func saveUserInfo(email: String,password: String, imageUrl: URL) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString, "status": ""]
+        let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString, "status": "online"]
         
         FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
             if let err = err {
@@ -130,9 +130,9 @@ class MainMessagesViewModel: ObservableObject {
         }
         self.isPhotoLoading = false
     }
+    
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
-        firestoreListeener?.remove()
         firestoreListeener = FireBaseManager.shared.firestore
             .collection("recent_messages")
             .document(uid)
@@ -153,6 +153,8 @@ class MainMessagesViewModel: ObservableObject {
                     }
                     if let recentMessage = try? change.document.data(as: RecentMessage.self) {
                         self.recentMessages.insert(recentMessage, at: 0)
+                    } else {
+                        print("Unable to fetch recent messages")
                     }
                 })
             }
@@ -167,6 +169,9 @@ class MainMessagesViewModel: ObservableObject {
             }
             print("Account successfully deleted.")
             self.isUserLoggedOut = true
+            self.currentUser = nil
+            FireBaseManager.shared.currentUser = nil
+            self.recentMessages = []
         }
     }
     func deleteDeletedAccountInfoFromFireStore() {

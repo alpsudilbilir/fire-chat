@@ -5,6 +5,22 @@
 //  Created by Alpsu Dilbilir on 12.07.2022.
 //
 
+//1
+//service cloud.firestore {
+//2
+//  match /databases/{database}/documents {
+//3
+//    match /{document=**} {
+//4
+//      allow read, write: if true;
+//5
+//    }
+//6
+//  }
+//7
+//}
+
+
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
@@ -17,7 +33,6 @@ struct RecentMessage: Codable, Identifiable {
     let fromId, toId: String
     let imageUrl: String
     let timestamp: Date
-    
     var username: String {
         email.components(separatedBy: "@").first ?? email
     }

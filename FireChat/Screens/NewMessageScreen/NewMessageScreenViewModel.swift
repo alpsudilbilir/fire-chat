@@ -25,8 +25,9 @@ class NewMessageScreenViewModel: ObservableObject {
                     let uid = data["uid"] as? String ?? ""
                     let email = data["email"] as? String ?? ""
                     let imageUrl = data["imageUrl"] as? String ?? ""
+                    let status = data["status"] as? String ?? ""
                     print(email)
-                    self.users.append(User(uid: uid, email: email, password: "", imageUrl: imageUrl))
+                    self.users.append(User(uid: uid, email: email, password: "", imageUrl: imageUrl, status: status))
                     print("Users successfully fetched.")
                 })
             }

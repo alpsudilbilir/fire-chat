@@ -27,6 +27,7 @@ struct SettingsListView: View {
                         vm.saveUserStatusToFireStore()
                         print(vm.selectedStatus + "setted.")
                         viewModel.fetchCurrentUser()
+                        viewModel.fetchRecentMessages()
                     }
                 
             }

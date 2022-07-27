@@ -16,6 +16,7 @@ class ChatScreenViewModel: ObservableObject {
     @Published var placeholder = "Message"
     @Published var isSendButtonDisabled = false
     @Published var disableSendButtonIfPhotoIsLoading = false
+    @Published var userStatus: String = ""
     var imageUrl: URL?
     var recipientUser: User?
     var snapshotListener: ListenerRegistration?
@@ -31,6 +32,21 @@ class ChatScreenViewModel: ObservableObject {
             return true
         } else {
             return false
+        }
+    }
+    func fetchUserStatus(uid: String) {
+        var status: String = ""
+        FireBaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, err in
+            if let err = err {
+                print("Failed to get status")
+                return
+            }
+            guard let data = snapshot?.data() else {
+                print("No status data found")
+                return
+            }
+            let status = data["status"] as? String ?? ""
+            self.userStatus = status
         }
     }
     func saveChatImageToStorage(image: UIImage?) {
@@ -122,7 +138,8 @@ class ChatScreenViewModel: ObservableObject {
             "fromId" : fromId,
             "toId" : toId,
             "imageUrl" : recipientUser?.imageUrl ?? "",
-            "email" : recipientUser?.email
+            "email" : recipientUser?.email,
+            "status": recipientUser?.status
         ] as [String : Any]
         document.setData(data) { err in
             if let err = err {
@@ -142,7 +159,8 @@ class ChatScreenViewModel: ObservableObject {
             "fromId": currentUser.uid,
             "toId" : toId,
             "imageUrl" : currentUser.imageUrl ?? "",
-            "email": currentUser.email
+            "email": currentUser.email,
+            "status": currentUser.status
         ] as [String : Any]
         
         FireBaseManager.shared.firestore
