@@ -14,23 +14,7 @@ struct SettingsListView: View {
     var body: some View {
         List {
             darkModeToggle
-            HStack {
-                Text("Status")
-                Spacer()
-                Picker("", selection: $vm.selectedStatus) {
-                    ForEach(vm.statusSelections, id: \.self) {
-                        Text($0)
-                            .foregroundColor(.black)
-                    }
-                }.pickerStyle(.menu)
-                    .onChange(of: vm.selectedStatus) { newValue in
-                        vm.saveUserStatusToFireStore()
-                        print(vm.selectedStatus + "setted.")
-                        viewModel.fetchCurrentUser()
-                        viewModel.fetchRecentMessages()
-                    }
-                
-            }
+            statusPicker
             favoriteMessages
             deleteAccountButton
         }
@@ -40,10 +24,28 @@ struct SettingsListView: View {
         .hasScrollEnabled(false)
         .listStyle(.plain)
     }
+    private var statusPicker: some View {
+        HStack {
+            Text("Status")
+            Spacer()
+            Picker("", selection: $vm.selectedStatus) {
+                ForEach(vm.statusSelections, id: \.self) {
+                    Text($0)
+                        .foregroundColor(.black)
+                }
+            }.pickerStyle(.menu)
+                .onChange(of: vm.selectedStatus) { newValue in
+                    vm.saveUserStatusToFireStore()
+                    print(vm.selectedStatus + "setted.")
+                    viewModel.fetchCurrentUser()
+                    viewModel.fetchRecentMessages()
+                }
+        }
+    }
     private var favoriteMessages: some View {
         NavigationLink {
             List(vm.favoriteMessages ?? ["No Message Found"], id: \.self) { message in
-                Text(message)
+                FavoriteMessagesScreen()
             }
         } label: {
             Text("Favorite Messages")
@@ -78,5 +80,6 @@ struct SettingsListView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsListView()
             .environmentObject(ProfileScreenViewModel())
+            .environmentObject(MainMessagesViewModel())
     }
 }

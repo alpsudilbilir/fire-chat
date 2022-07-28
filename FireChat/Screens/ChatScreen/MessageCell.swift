@@ -7,10 +7,11 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-struct ChatMessageScreen: View {
+struct MessageCell: View {
     @EnvironmentObject var vm : ProfileScreenViewModel
+    @ObservedObject var mainVm = MainMessagesViewModel()
     @Environment(\.colorScheme) var colorScheme
-
+    let user: User
     let message: ChatMessage
     @State var showMessageDialog = false
     @State var selectedImage: Image?
@@ -29,7 +30,7 @@ struct ChatMessageScreen: View {
                             .cornerRadius(25)
                             .padding(.horizontal)
                             .onLongPressGesture {
-                                    showMessageDialog.toggle()
+                                showMessageDialog.toggle()
                             }
                     }
                 }
@@ -72,7 +73,6 @@ struct ChatMessageScreen: View {
                             .onLongPressGesture {
                                 showMessageDialog.toggle()
                                 selectedMessage = message.message
-
                             }
                     }
                     .padding()
@@ -87,11 +87,10 @@ struct ChatMessageScreen: View {
         }
         .confirmationDialog("", isPresented: $showMessageDialog) {
             Button(role: .none) {
-                vm.favoriteMessages.insert(selectedMessage!, at: 0)
+                mainVm.saveToFavoriteMessages(message: message, user: user)
             } label: {
                 Text("Add to favorites")
             }
-
         }
     }
 }

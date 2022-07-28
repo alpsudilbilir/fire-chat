@@ -8,6 +8,15 @@
 import Foundation
 
 struct FavoriteMessage: Codable {
-    var fromWho: String
+    var uid: String // Will Be document
+    var fromId: String // Will Be Docoument
+    
+    var from: String
     var message: String
+    var timestamp: Date
+    var imageUrl: String
+    
+    var username: String {
+        from.components(separatedBy: "@").first ?? from
+    }
 }

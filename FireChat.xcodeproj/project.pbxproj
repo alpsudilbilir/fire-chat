@@ -34,7 +34,7 @@
 		158DC36928842C1100D4B2E1 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36828842C1100D4B2E1 /* ProfileScreen.swift */; };
 		158DC36B2884372600D4B2E1 /* PhotoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36A2884372600D4B2E1 /* PhotoScreen.swift */; };
 		158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158FB964286FA56900A1F902 /* ChatScreen.swift */; };
-		15997244287C3C6800832589 /* ChatMessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15997243287C3C6800832589 /* ChatMessageScreen.swift */; };
+		15997244287C3C6800832589 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15997243287C3C6800832589 /* MessageCell.swift */; };
 		15997246287C4EE000832589 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15997245287C4EE000832589 /* README.md */; };
 		15B36CD8286E6F3B00E2ECB9 /* NewMessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */; };
 		15B36CDA286E756100E2ECB9 /* NewMessageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */; };
@@ -43,6 +43,7 @@
 		15BAA070286A247000B26884 /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA06F286A247000B26884 /* MessageItem.swift */; };
 		15BAA074286A3E4400B26884 /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */; };
 		15BF462D287CF580009196F6 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF462C287CF580009196F6 /* RecentMessage.swift */; };
+		15D2084F2892AD7900E2FC46 /* FavoriteMessagesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2084E2892AD7900E2FC46 /* FavoriteMessagesScreen.swift */; };
 		15D41F99286880D2003686E3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D41F98286880D2003686E3 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +71,7 @@
 		158DC36828842C1100D4B2E1 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		158DC36A2884372600D4B2E1 /* PhotoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoScreen.swift; sourceTree = "<group>"; };
 		158FB964286FA56900A1F902 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
-		15997243287C3C6800832589 /* ChatMessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageScreen.swift; sourceTree = "<group>"; };
+		15997243287C3C6800832589 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		15997245287C4EE000832589 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		15B36CD7286E6F3B00E2ECB9 /* NewMessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageScreen.swift; sourceTree = "<group>"; };
 		15B36CD9286E756100E2ECB9 /* NewMessageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageScreenViewModel.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		15BAA06F286A247000B26884 /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
 		15BAA073286A3E4400B26884 /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
 		15BF462C287CF580009196F6 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
+		15D2084E2892AD7900E2FC46 /* FavoriteMessagesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMessagesScreen.swift; sourceTree = "<group>"; };
 		15D41F98286880D2003686E3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,7 +164,7 @@
 			children = (
 				158FB964286FA56900A1F902 /* ChatScreen.swift */,
 				150E820D28778D790044A82D /* ChatScreenViewModel.swift */,
-				15997243287C3C6800832589 /* ChatMessageScreen.swift */,
+				15997243287C3C6800832589 /* MessageCell.swift */,
 			);
 			path = ChatScreen;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 				158DC36828842C1100D4B2E1 /* ProfileScreen.swift */,
 				158DC36A2884372600D4B2E1 /* PhotoScreen.swift */,
 				154EBBD4288CA34A005AB5DE /* SettingsListView.swift */,
+				15D2084E2892AD7900E2FC46 /* FavoriteMessagesScreen.swift */,
 			);
 			path = "Profile Screen";
 			sourceTree = "<group>";
@@ -346,7 +349,8 @@
 				1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */,
 				154EBBD7288CA36F005AB5DE /* ProfileScreenViewModel.swift in Sources */,
 				154EBBD3288C9F2B005AB5DE /* UserDefaultService.swift in Sources */,
-				15997244287C3C6800832589 /* ChatMessageScreen.swift in Sources */,
+				15D2084F2892AD7900E2FC46 /* FavoriteMessagesScreen.swift in Sources */,
+				15997244287C3C6800832589 /* MessageCell.swift in Sources */,
 				15BAA070286A247000B26884 /* MessageItem.swift in Sources */,
 				153382CB2863CB9D00CACE3C /* LoginRegisterScreen.swift in Sources */,
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,

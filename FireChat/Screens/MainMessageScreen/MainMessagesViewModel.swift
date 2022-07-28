@@ -29,6 +29,7 @@ class MainMessagesViewModel: ObservableObject {
         }
         fetchCurrentUser()
     }
+
     func loginUser(email: String, password: String) {
         self.isProgressContinues = true
         FireBaseManager.shared.auth.signIn(withEmail: email, password: password) { res, err in
@@ -158,6 +159,29 @@ class MainMessagesViewModel: ObservableObject {
                     }
                 })
             }
+    }
+    
+    func saveToFavoriteMessages(message: ChatMessage, user: User) {
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+
+        let document = FireBaseManager.shared.firestore
+            .collection("favorite_messages")
+            .document(uid)
+            .collection("favorites")
+        let data = [
+            "from": user.email,
+            "message": message.message,
+            "timestamp": Timestamp(),
+            "imageUrl": user.imageUrl
+        ] as [String: Any]
+        
+        document.addDocument(data: data) { err in
+            if let err = err {
+                print("Failed to add message to favorites")
+                return
+            }
+            print("Successfully saved to favorites")
+        }
     }
     func deleteAccount() {
         guard let user = FireBaseManager.shared.auth.currentUser else { return }

@@ -16,6 +16,8 @@ struct ChatScreen: View {
     @State var image: UIImage?
     @State var showImagePickerSheet = false
     @State var isUserSendingImage = false
+    @State var showMessageDialog = false
+
     
     
     init(user: User) {
@@ -42,9 +44,6 @@ struct ChatScreen: View {
             }
             bottomBar
         }
-        .onAppear(perform: {
-//            vm.fetchUserStatus(uid: vm.recipientUser?.uid ?? "")
-        })
         .onChange(of: vm.messageText, perform: { newValue in
             if !vm.messageText.isEmpty {
                 vm.isSendButtonDisabled = false
@@ -108,12 +107,16 @@ struct ChatScreen: View {
             ScrollViewReader { reader in
                 VStack {
                     ForEach(vm.messages) { message in
-                        ChatMessageScreen(message: message)
-                            .onChange(of: vm.messages.count) { newValue in
-                                withAnimation(.easeOut(duration: 0.5)) {
-                                    reader.scrollTo("bottom", anchor: .bottom)
-                                }
+                        
+
+                        if let user = user {
+                            MessageCell(user: user ,message: message)
+                                .onChange(of: vm.messages.count) { newValue in
+                                    withAnimation(.easeOut(duration: 0.5)) {
+                                        reader.scrollTo("bottom", anchor: .bottom)
+                                    }
                             }
+                        }
                     }.onAppear {
                         reader.scrollTo("bottom", anchor: .bottom)
                     }
