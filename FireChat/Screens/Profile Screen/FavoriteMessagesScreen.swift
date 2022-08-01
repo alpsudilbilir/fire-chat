@@ -41,14 +41,26 @@ struct FavoriteMessagesScreen: View {
                                     Spacer()
                                 }
                             }
-                      
+                            
                             Spacer()
                             Text(message.timeAgo)
                                 .font(.caption)
                         }
-                      
+                        
                         Divider()
                     }.padding(.horizontal)
+                        .contextMenu(menuItems: {
+                            Button {
+                                //Delete
+                            } label: {
+                                Text("Delete")
+                            }
+                            Button {
+                                //Cancel
+                            } label: {
+                                Text("Cancel")
+                            }
+                        })
                 }
             }
         }
