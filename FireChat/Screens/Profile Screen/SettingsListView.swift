@@ -44,9 +44,8 @@ struct SettingsListView: View {
     }
     private var favoriteMessages: some View {
         NavigationLink {
-            List(vm.favoriteMessages ?? ["No Message Found"], id: \.self) { message in
                 FavoriteMessagesScreen()
-            }
+                    .environmentObject(viewModel)
         } label: {
             Text("Favorite Messages")
         }

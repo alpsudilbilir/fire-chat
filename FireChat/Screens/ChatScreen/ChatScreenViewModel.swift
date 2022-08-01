@@ -52,7 +52,12 @@ class ChatScreenViewModel: ObservableObject {
     func saveChatImageToStorage(image: UIImage?) {
         disableSendButtonIfPhotoIsLoading = true
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let ref = FireBaseManager.shared.storage.reference(withPath: uid)
+        guard let recipientUserId = self.recipientUser?.uid else {
+            print("Unable to get recipient user id.")
+            return
+        }
+        let identifier = UUID()
+        let ref = FireBaseManager.shared.storage.reference(withPath: uid + "/" +  recipientUserId + "/image/" + "\(identifier)")
         guard let imageData = image?.jpegData(compressionQuality: 0.5) else { return }
         ref.putData(imageData, metadata: nil) { metadata, err in
             if let err = err {

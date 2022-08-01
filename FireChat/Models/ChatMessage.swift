@@ -15,4 +15,14 @@ struct ChatMessage:Codable, Identifiable {
     let toId: String
     let message: String
     let imageUrl: String?
+    let timestamp: Date
+    
+    var timeAgo: String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .abbreviated
+        return formatter.localizedString(for: timestamp, relativeTo: Date())
+    }
+
 }
+
+

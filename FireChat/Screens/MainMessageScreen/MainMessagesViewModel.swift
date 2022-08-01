@@ -21,6 +21,7 @@ class MainMessagesViewModel: ObservableObject {
     @Published var isPhotoLoading = false
     @Published var showLoginAlert = false
     @Published var showRegistirationAlert = false
+    @Published var favoriteChatMessages = [FavoriteMessage]()
     private var firestoreListeener: ListenerRegistration?
     
     init() {
@@ -160,6 +161,34 @@ class MainMessagesViewModel: ObservableObject {
                 })
             }
     }
+    func fetchFavoriteMessages() {
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+        
+        FireBaseManager.shared.firestore
+            .collection("favorite_messages")
+            .document(uid)
+            .collection("favorites")
+            .order(by: "timestamp")
+            .addSnapshotListener { querySnapshot, err in
+                if let err = err {
+                    print("Failed to fetch favorite messages. \(err)")
+                    return
+                }
+                querySnapshot?.documentChanges.forEach({ change in
+                    if change.type == .added {
+                        let data = change.document.data()
+                        if let message = try? change.document.data(as: FavoriteMessage.self) {
+                            self.favoriteChatMessages.append(message)
+                        } else {
+                            print("Unable to decode messages as Favorite message")
+                        }
+                    } else {
+                        print(".added not working")
+                    }
+                })
+                print("Favorite Messages successfully fetched.")
+            }
+    }
     
     func saveToFavoriteMessages(message: ChatMessage, user: User) {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
@@ -169,10 +198,10 @@ class MainMessagesViewModel: ObservableObject {
             .document(uid)
             .collection("favorites")
         let data = [
-            "from": user.email,
+            "from": message.fromId == currentUser?.uid ? currentUser?.email : user.email,
             "message": message.message,
             "timestamp": Timestamp(),
-            "imageUrl": user.imageUrl
+            "imageUrl": message.fromId == currentUser?.uid ? currentUser?.imageUrl : user.imageUrl,
         ] as [String: Any]
         
         document.addDocument(data: data) { err in
@@ -183,6 +212,7 @@ class MainMessagesViewModel: ObservableObject {
             print("Successfully saved to favorites")
         }
     }
+   
     func deleteAccount() {
         guard let user = FireBaseManager.shared.auth.currentUser else { return }
         self.deleteDeletedAccountInfoFromFireStore()

@@ -20,7 +20,7 @@
 		154EBBD3288C9F2B005AB5DE /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154EBBD2288C9F2B005AB5DE /* UserDefaultService.swift */; };
 		154EBBD5288CA34A005AB5DE /* SettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154EBBD4288CA34A005AB5DE /* SettingsListView.swift */; };
 		154EBBD7288CA36F005AB5DE /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154EBBD6288CA36F005AB5DE /* ProfileScreenViewModel.swift */; };
-		154EBBD9288CBB4F005AB5DE /* FavoriteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154EBBD8288CBB4F005AB5DE /* FavoriteMessage.swift */; };
+		15533F042897ED2B00F448CF /* FavoriteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15533F032897ED2B00F448CF /* FavoriteMessage.swift */; };
 		1584B7902882EBC100EEFDC4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1584B78F2882EBC100EEFDC4 /* FirebaseAuth */; };
 		1584B7922882EBC100EEFDC4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1584B7912882EBC100EEFDC4 /* FirebaseFirestore */; };
 		1584B7942882EBC100EEFDC4 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1584B7932882EBC100EEFDC4 /* FirebaseFirestoreSwift */; };
@@ -61,7 +61,7 @@
 		154EBBD2288C9F2B005AB5DE /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
 		154EBBD4288CA34A005AB5DE /* SettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListView.swift; sourceTree = "<group>"; };
 		154EBBD6288CA36F005AB5DE /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
-		154EBBD8288CBB4F005AB5DE /* FavoriteMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMessage.swift; sourceTree = "<group>"; };
+		15533F032897ED2B00F448CF /* FavoriteMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMessage.swift; sourceTree = "<group>"; };
 		1585AB022863D87A00957B30 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		1585AB052863D94200957B30 /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
 		1585AB092863DA0E00957B30 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 				1585AB112863DECB00957B30 /* User.swift */,
 				152549502878891700CBD016 /* ChatMessage.swift */,
 				15BF462C287CF580009196F6 /* RecentMessage.swift */,
-				154EBBD8288CBB4F005AB5DE /* FavoriteMessage.swift */,
+				15533F032897ED2B00F448CF /* FavoriteMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -344,7 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				15B36CD8286E6F3B00E2ECB9 /* NewMessageScreen.swift in Sources */,
-				154EBBD9288CBB4F005AB5DE /* FavoriteMessage.swift in Sources */,
 				151A33D72865F245005F039B /* FireBaseManager.swift in Sources */,
 				1585AB062863D94200957B30 /* CustomSecureField.swift in Sources */,
 				154EBBD7288CA36F005AB5DE /* ProfileScreenViewModel.swift in Sources */,
@@ -356,6 +355,7 @@
 				153382C92863CB9D00CACE3C /* FireChatApp.swift in Sources */,
 				150E820E28778D790044A82D /* ChatScreenViewModel.swift in Sources */,
 				15BF462D287CF580009196F6 /* RecentMessage.swift in Sources */,
+				15533F042897ED2B00F448CF /* FavoriteMessage.swift in Sources */,
 				1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */,
 				158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */,
 				15180B45287387CB001F3194 /* ContentView.swift in Sources */,

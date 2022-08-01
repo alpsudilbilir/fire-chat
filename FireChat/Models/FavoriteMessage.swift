@@ -2,21 +2,25 @@
 //  FavoriteMessage.swift
 //  FireChat
 //
-//  Created by Alpsu Dilbilir on 24.07.2022.
+//  Created by Alpsu Dilbilir on 1.08.2022.
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct FavoriteMessage: Codable {
-    var uid: String // Will Be document
-    var fromId: String // Will Be Docoument
+struct FavoriteMessage: Codable, Identifiable {
+    @DocumentID var id: String?
     
-    var from: String
-    var message: String
-    var timestamp: Date
-    var imageUrl: String
     
-    var username: String {
-        from.components(separatedBy: "@").first ?? from
+    let from: String
+    let message: String
+    let timestamp: Date
+    let imageUrl: String?
+    
+    var timeAgo: String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .abbreviated
+        return formatter.localizedString(for: timestamp, relativeTo: Date())
     }
+
 }
