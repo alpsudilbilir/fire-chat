@@ -13,10 +13,8 @@ struct MessageCell: View {
     @Environment(\.colorScheme) var colorScheme
     let user: User
     let message: ChatMessage
-    @State var showMessageDialog = false
     @State var selectedImage: Image?
     @State var selectedMessage: String?
-    
     var body: some View {
         VStack {
             if message.fromId == FireBaseManager.shared.auth.currentUser?.uid {
@@ -29,9 +27,7 @@ struct MessageCell: View {
                             .scaledToFit()
                             .cornerRadius(25)
                             .padding(.horizontal)
-                            .onLongPressGesture {
-                                showMessageDialog.toggle()
-                            }
+                          
                     }
                 }
                 HStack {
@@ -39,15 +35,22 @@ struct MessageCell: View {
                     HStack {
                         Text(message.message)
                             .foregroundColor(.white)
-                            .onLongPressGesture {
-                                showMessageDialog.toggle()
-                                selectedMessage = message.message
-                            }
                     }
                     .padding()
                     .background(Color.fire)
                     .cornerRadius(10)
                     .frame(alignment: .leading)
+                    .contextMenu(menuItems: {
+                        Button {
+                            mainVm.saveToFavoriteMessages(message: message, user: user)
+                        } label: {
+                            HStack {
+                                Text("Add to favorites")
+                                Spacer()
+                                Image(systemName: "heart")
+                            }
+                        }
+                    })
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -60,9 +63,7 @@ struct MessageCell: View {
                             .scaledToFit()
                             .cornerRadius(25)
                             .padding(.horizontal)
-                            .onLongPressGesture {
-                                showMessageDialog.toggle()
-                            }
+                         
                         Spacer()
                     }
                 }
@@ -70,26 +71,28 @@ struct MessageCell: View {
                     HStack {
                         Text(message.message)
                             .foregroundColor(colorScheme == .dark ? .white : .black)
-                            .onLongPressGesture {
-                                showMessageDialog.toggle()
-                                selectedMessage = message.message
-                            }
                     }
                     .padding()
-                    .background(colorScheme == .dark ? .ultraThinMaterial : .thin)
+                    .background(colorScheme == .dark ? .gray.opacity(0.3)  : .gray.opacity(0.1))
                     .cornerRadius(10)
                     .frame(alignment: .leading)
+                    .contextMenu(menuItems: {
+                        Button {
+                            mainVm.saveToFavoriteMessages(message: message, user: user)
+                        } label: {
+                            HStack {
+                                Text("Add to favorites")
+                                Spacer()
+                                Image(systemName: "heart")
+                            }
+                        }
+                        
+                    })
+
                     Spacer()
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
-            }
-        }
-        .confirmationDialog("", isPresented: $showMessageDialog) {
-            Button(role: .none) {
-                mainVm.saveToFavoriteMessages(message: message, user: user)
-            } label: {
-                Text("Add to favorites")
             }
         }
     }
