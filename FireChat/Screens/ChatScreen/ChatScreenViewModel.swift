@@ -24,6 +24,7 @@ class ChatScreenViewModel: ObservableObject {
         self.recipientUser = user
         self.isSendButtonDisabled = messageText.isEmpty
     }
+    
     func checkSendButton() -> Bool {
         if disableSendButtonIfPhotoIsLoading {
             return true

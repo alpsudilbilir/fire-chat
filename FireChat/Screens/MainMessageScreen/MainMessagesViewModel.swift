@@ -97,41 +97,41 @@ class MainMessagesViewModel: ObservableObject {
             }
         }
     }
-    //Only used in registiration process.
-    private func saveUserInfo(email: String,password: String, imageUrl: URL) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString, "status": "online"]
-        
-        FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
-            if let err = err {
-                print("Failed to save user info. \(err)")
-                return
-            }
-            print("Succesfully user data is stored!")
-            self.fetchCurrentUser()
-            self.isUserLoggedOut = false
+    func saveUserInfo(email: String,password: String, imageUrl: URL) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    let userData = ["email": email,"password": password , "uid": uid, "imageUrl": imageUrl.absoluteString, "status": "online"]
+    
+    FireBaseManager.shared.firestore.collection("users").document(uid).setData(userData) { err in
+        if let err = err {
+            print("Failed to save user info. \(err)")
+            return
         }
+        print("Succesfully user data is stored!")
+        self.fetchCurrentUser()
+        self.isUserLoggedOut = false
     }
-     func fetchCurrentUser() {
-        guard let uid =  FireBaseManager.shared.auth.currentUser?.uid else { return }
-        FireBaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, err in
-            if let err = err {
-                print("Failed to fetch current user \(err)")
-                return
-            }
-            guard let data = snapshot?.data() else {
-                print("No data found.")
-                return
-            }
-            let uid = data["uid"] as? String ?? ""
-            let email = data["email"] as? String ?? ""
-            let imageUrl = data["imageUrl"] as? String ?? ""
-            let status = data["status"] as? String ?? ""
-            self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl, status: status)
-            FireBaseManager.shared.currentUser = self.currentUser
+}
+    
+    func fetchCurrentUser() {
+    guard let uid =  FireBaseManager.shared.auth.currentUser?.uid else { return }
+    FireBaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, err in
+        if let err = err {
+            print("Failed to fetch current user \(err)")
+            return
         }
-        self.isPhotoLoading = false
+        guard let data = snapshot?.data() else {
+            print("No data found.")
+            return
+        }
+        let uid = data["uid"] as? String ?? ""
+        let email = data["email"] as? String ?? ""
+        let imageUrl = data["imageUrl"] as? String ?? ""
+        let status = data["status"] as? String ?? ""
+        self.currentUser = User(uid: uid, email: email, imageUrl: imageUrl, status: status)
+        FireBaseManager.shared.currentUser = self.currentUser
     }
+    self.isPhotoLoading = false
+}
     
     func fetchRecentMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
@@ -145,7 +145,6 @@ class MainMessagesViewModel: ObservableObject {
                     print("Failed to fetch recent messages \(err).")
                     return
                 }
-                
                 querySnapshot?.documentChanges.forEach({ change in
                     let docId = change.document.documentID
                     if let index = self.recentMessages.firstIndex(where: { recent in
@@ -161,9 +160,9 @@ class MainMessagesViewModel: ObservableObject {
                 })
             }
     }
+    
     func fetchFavoriteMessages() {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
-        
         FireBaseManager.shared.firestore
             .collection("favorite_messages")
             .document(uid)
@@ -189,7 +188,6 @@ class MainMessagesViewModel: ObservableObject {
                 print("Favorite Messages successfully fetched.")
             }
     }
-    
     func saveToFavoriteMessages(message: ChatMessage, user: User) {
         guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
 
@@ -212,7 +210,24 @@ class MainMessagesViewModel: ObservableObject {
             print("Successfully saved to favorites")
         }
     }
-   
+    func deleteFavoriteMessage(message: FavoriteMessage) {
+        guard let uid = FireBaseManager.shared.auth.currentUser?.uid else { return }
+        guard let messageId = message.id else { return }
+        FireBaseManager.shared.firestore
+            .collection("favorite_messages")
+            .document(uid)
+            .collection("favorites")
+            .document(messageId)
+            .delete { err in
+                if let err = err {
+                    print("Failed to delete favorite message")
+                    return
+                }
+                self.favoriteChatMessages =  self.favoriteChatMessages.filter{  $0.id != message.id }
+            }
+        print("Successfully deleted.")
+    }
+    
     func deleteAccount() {
         guard let user = FireBaseManager.shared.auth.currentUser else { return }
         self.deleteDeletedAccountInfoFromFireStore()

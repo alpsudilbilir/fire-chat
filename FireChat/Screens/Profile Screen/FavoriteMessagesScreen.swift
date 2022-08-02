@@ -51,15 +51,11 @@ struct FavoriteMessagesScreen: View {
                     }.padding(.horizontal)
                         .contextMenu(menuItems: {
                             Button {
-                                //Delete
+                                viewModel.deleteFavoriteMessage(message: message)
                             } label: {
                                 Text("Delete")
                             }
-                            Button {
-                                //Cancel
-                            } label: {
-                                Text("Cancel")
-                            }
+                            Button { } label: { Text("Cancel") }
                         })
                 }
             }
