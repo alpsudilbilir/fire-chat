@@ -53,7 +53,7 @@ struct FavoriteMessagesScreen: View {
                             Button {
                                 viewModel.deleteFavoriteMessage(message: message)
                             } label: {
-                                Text("Delete")
+                                Text("Remove from favorites")
                             }
                             Button { } label: { Text("Cancel") }
                         })

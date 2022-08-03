@@ -7,14 +7,19 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import UniformTypeIdentifiers
+
 struct MessageCell: View {
     @EnvironmentObject var vm : ProfileScreenViewModel
     @ObservedObject var mainVm = MainMessagesViewModel()
+    
     @Environment(\.colorScheme) var colorScheme
     let user: User
     let message: ChatMessage
     @State var selectedImage: Image?
     @State var selectedMessage: String?
+    
+    @ObservedObject var chatVm = ChatScreenViewModel(user: nil)
     var body: some View {
         VStack {
             if message.fromId == FireBaseManager.shared.auth.currentUser?.uid {
@@ -27,7 +32,6 @@ struct MessageCell: View {
                             .scaledToFit()
                             .cornerRadius(25)
                             .padding(.horizontal)
-                          
                     }
                 }
                 HStack {
@@ -50,6 +54,26 @@ struct MessageCell: View {
                                 Image(systemName: "heart")
                             }
                         }
+                        Button {
+                            chatVm.deleteMessageFromUser(message: message) 
+                        } label: {
+                            HStack {
+                                Text("Delete")
+                                Spacer()
+                                Image(systemName: "trash")
+                            }
+                        }
+                        Button {
+                            UIPasteboard.general.setValue(message.message,
+                                        forPasteboardType: UTType.plainText.identifier)
+                        } label: {
+                            HStack {
+                                Text("Copy")
+                                Spacer()
+                                Image(systemName: "doc.on.doc")
+                            }
+                        }
+
                     })
                 }
                 .padding(.horizontal)
@@ -86,7 +110,26 @@ struct MessageCell: View {
                                 Image(systemName: "heart")
                             }
                         }
-                        
+                        Button {
+                            chatVm.deleteMessageFromUser(message: message)
+                        } label: {
+                            HStack {
+                                Text("Delete")
+                                Spacer()
+                                Image(systemName: "trash")
+                            }
+                        }
+                        Button {
+                            UIPasteboard.general.setValue(message.message,
+                                        forPasteboardType: UTType.plainText.identifier)
+                        } label: {
+                            HStack {
+                                Text("Copy")
+                                Spacer()
+                                Image(systemName: "doc.on.doc")
+                            }
+                        }
+
                     })
 
                     Spacer()

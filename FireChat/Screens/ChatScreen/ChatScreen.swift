@@ -17,7 +17,7 @@ struct ChatScreen: View {
     @State var showImagePickerSheet = false
     @State var isUserSendingImage = false
     @State var showMessageDialog = false
-
+    @State var refresh: Bool = false
     
     
     init(user: User) {
@@ -41,6 +41,7 @@ struct ChatScreen: View {
                 }
             } else {
                 messageView
+                    
             }
             bottomBar
         }
@@ -107,15 +108,13 @@ struct ChatScreen: View {
             ScrollViewReader { reader in
                 VStack {
                     ForEach(vm.messages) { message in
-                        
-
                         if let user = user {
                             MessageCell(user: user ,message: message)
                                 .onChange(of: vm.messages.count) { newValue in
                                     withAnimation(.easeOut(duration: 0.5)) {
                                         reader.scrollTo("bottom", anchor: .bottom)
                                     }
-                            }
+                                }
                         }
                     }.onAppear {
                         reader.scrollTo("bottom", anchor: .bottom)
@@ -132,7 +131,6 @@ struct ChatScreen: View {
             vm.placeholder = "Message"
         }
     }
-    
     private var bottomBar: some View {
         
         HStack {

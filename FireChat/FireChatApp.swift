@@ -9,10 +9,8 @@ import SwiftUI
 import Firebase
 
 @main
-//TODO: Saving user status to firestore
-//TODO: Saving favorite messages to user defaults (if it doesn't work try firestore)
-//TODO: Save favorite images to user defaults.
-//TODO: Fix changin profile image bug. (Changing profile photo is making all sent photos same with profile image)
+//TODO: Delete recent mesages
+//TODO: Fix the bug. (When chat message deleted view is not refreshing.)
 //--------------------
 struct FireChatApp: App {
     @StateObject var viewModel =  MainMessagesViewModel()

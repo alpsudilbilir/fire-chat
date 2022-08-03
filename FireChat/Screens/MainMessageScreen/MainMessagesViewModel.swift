@@ -228,6 +228,8 @@ class MainMessagesViewModel: ObservableObject {
         print("Successfully deleted.")
     }
     
+  
+    
     func deleteAccount() {
         guard let user = FireBaseManager.shared.auth.currentUser else { return }
         self.deleteDeletedAccountInfoFromFireStore()

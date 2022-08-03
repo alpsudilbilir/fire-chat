@@ -20,7 +20,7 @@ class ChatScreenViewModel: ObservableObject {
     var imageUrl: URL?
     var recipientUser: User?
     var snapshotListener: ListenerRegistration?
-    init(user: User) {
+    init(user: User?) {
         self.recipientUser = user
         self.isSendButtonDisabled = messageText.isEmpty
     }
@@ -98,11 +98,37 @@ class ChatScreenViewModel: ObservableObject {
                         if let message = try? change.document.data(as: ChatMessage.self) {
                             self.messages.append(message)
                         }
+                    } else if change.type == .removed {
+                        let data = change.document.data()
+                        if let message = try? change.document.data(as: ChatMessage.self) {
+                            self.messages = self.messages.filter( { $0.id != message.id})
+                        }
                     }
                 })
             }
         print("Messages successfully fetched.")
     }
+    func deleteMessageFromUser(message: ChatMessage) {
+        //message.toId == uid ? message.fromId : message.toId
+        guard let uid = FireBaseManager.shared.currentUser?.uid else { return }
+
+        guard let messageId = message.id else {
+            print("No message id found")
+            return }
+        print(messageId)
+        FireBaseManager.shared.firestore
+            .collection("messages")
+            .document(uid)
+            .collection(message.toId == uid ? message.fromId : message.toId)
+            .document(messageId)
+            .delete { err in
+                if let err = err {
+                    print("Failed to delete message")
+                }
+                print("Message successfully deleted.")
+            }
+    }
+
     func handleSend(imageUrl: URL?)  {
         guard let fromId = FireBaseManager.shared.auth.currentUser?.uid else { return } //Sending User
         guard let toId = recipientUser?.uid else { return } //Receiving User
