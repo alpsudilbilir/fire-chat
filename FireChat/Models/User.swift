@@ -14,6 +14,7 @@ struct User: Codable {
     var password: String = ""
     var imageUrl: String?
     var status: String = ""
+    
     var username: String {
         email.components(separatedBy: "@").first ?? email
     }

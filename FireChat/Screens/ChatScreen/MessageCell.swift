@@ -10,16 +10,16 @@ import SDWebImageSwiftUI
 import UniformTypeIdentifiers
 
 struct MessageCell: View {
-    @EnvironmentObject var vm : ProfileScreenViewModel
+    @EnvironmentObject var profileVm : ProfileScreenViewModel
     @ObservedObject var mainVm = MainMessagesViewModel()
-    
+    @ObservedObject var chatVm = ChatScreenViewModel(user: nil)
     @Environment(\.colorScheme) var colorScheme
+    
     let user: User
     let message: ChatMessage
+    
     @State var selectedImage: Image?
     @State var selectedMessage: String?
-    
-    @ObservedObject var chatVm = ChatScreenViewModel(user: nil)
     var body: some View {
         VStack {
             if message.fromId == FireBaseManager.shared.auth.currentUser?.uid {
@@ -39,6 +39,12 @@ struct MessageCell: View {
                     HStack {
                         Text(message.message)
                             .foregroundColor(.white)
+                        VStack {
+                            Spacer()
+                            Text("15.42")
+                                .foregroundColor(.white)
+                                .font(.caption2)
+                        }
                     }
                     .padding()
                     .background(Color.fire)
@@ -55,7 +61,7 @@ struct MessageCell: View {
                             }
                         }
                         Button {
-                            chatVm.deleteMessageFromUser(message: message) 
+                            chatVm.deleteMessageFromUser(message: message)
                         } label: {
                             HStack {
                                 Text("Delete")
@@ -65,7 +71,7 @@ struct MessageCell: View {
                         }
                         Button {
                             UIPasteboard.general.setValue(message.message,
-                                        forPasteboardType: UTType.plainText.identifier)
+                                                          forPasteboardType: UTType.plainText.identifier)
                         } label: {
                             HStack {
                                 Text("Copy")
@@ -73,7 +79,6 @@ struct MessageCell: View {
                                 Image(systemName: "doc.on.doc")
                             }
                         }
-
                     })
                 }
                 .padding(.horizontal)
@@ -87,7 +92,7 @@ struct MessageCell: View {
                             .scaledToFit()
                             .cornerRadius(25)
                             .padding(.horizontal)
-                         
+                        
                         Spacer()
                     }
                 }
@@ -121,7 +126,7 @@ struct MessageCell: View {
                         }
                         Button {
                             UIPasteboard.general.setValue(message.message,
-                                        forPasteboardType: UTType.plainText.identifier)
+                                                          forPasteboardType: UTType.plainText.identifier)
                         } label: {
                             HStack {
                                 Text("Copy")
@@ -129,9 +134,9 @@ struct MessageCell: View {
                                 Image(systemName: "doc.on.doc")
                             }
                         }
-
+                        
                     })
-
+                    
                     Spacer()
                 }
                 .padding(.horizontal)

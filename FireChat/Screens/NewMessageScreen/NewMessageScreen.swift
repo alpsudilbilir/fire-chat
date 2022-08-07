@@ -10,12 +10,12 @@ import SDWebImageSwiftUI
 
 struct NewMessageScreen: View {
     @Environment(\.presentationMode) var dismiss
-    @ObservedObject var viewModel = NewMessageScreenViewModel()
+    @ObservedObject var mainVm = NewMessageScreenViewModel()
     let didSelectNewUser: (User) -> ()
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(viewModel.users, id:\.uid) { user  in
+                ForEach(mainVm.users, id:\.uid) { user  in
                     HStack {
                         WebImage(url: URL(string: user.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
                             .resizable()

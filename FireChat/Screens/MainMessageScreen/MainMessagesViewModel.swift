@@ -146,6 +146,16 @@ class MainMessagesViewModel: ObservableObject {
                     return
                 }
                 querySnapshot?.documentChanges.forEach({ change in
+                    if change.type == .removed {
+                        let data = change.document.data()
+                        print(data)
+
+                        if let message = try? change.document.data(as: RecentMessage.self) {
+                            self.recentMessages = self.recentMessages.filter( { $0.email !=
+                                message.email })
+                        }
+                        return
+                    }
                     let docId = change.document.documentID
                     if let index = self.recentMessages.firstIndex(where: { recent in
                         return recent.id == docId
@@ -158,6 +168,42 @@ class MainMessagesViewModel: ObservableObject {
                         print("Unable to fetch recent messages")
                     }
                 })
+            }
+    }
+    func deleteRecentMessages(selectedMessage: RecentMessage) {
+        guard let uid = FireBaseManager.shared.currentUser?.uid else { return }
+        
+        FireBaseManager.shared.firestore
+            .collection("recent_messages")
+            .document(uid)
+            .collection("recentMessages")
+            .document(selectedMessage.fromId == uid ? selectedMessage.toId : selectedMessage.fromId)
+            .delete { err in
+                if let err = err {
+                    print("Failed to delete recent message")
+                    return
+                }
+                print("Recent message successfully deleted.")
+                self.deleteAllMessages(selectedMessage: selectedMessage)
+                
+            }
+        
+    }
+    func deleteAllMessages(selectedMessage: RecentMessage) {
+        guard let uid = FireBaseManager.shared.currentUser?.uid else { return }
+        FireBaseManager.shared.firestore
+            .collection("messages")
+            .document(uid)
+            .collection(selectedMessage.fromId == uid ? selectedMessage.toId : selectedMessage.fromId)
+            .getDocuments { querySnapshot, err in
+                if let err = err {
+                    print("Unable to get documents")
+                    return
+                }
+                querySnapshot?.documents.forEach({ snapshot in
+                    snapshot.reference.delete()
+                })
+                print("All messages succesfully deleted.")
             }
     }
     

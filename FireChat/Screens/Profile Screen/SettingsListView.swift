@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingsListView: View {
-    @EnvironmentObject var viewModel: MainMessagesViewModel
-    @EnvironmentObject var vm : ProfileScreenViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
+    @EnvironmentObject var profileVm : ProfileScreenViewModel
     
     var body: some View {
         List {
@@ -19,7 +19,7 @@ struct SettingsListView: View {
             deleteAccountButton
         }
         .onAppear(perform: {
-            vm.selectedStatus = viewModel.currentUser?.status ?? ""
+            profileVm.selectedStatus = mainVm.currentUser?.status ?? ""
         })
         .hasScrollEnabled(false)
         .listStyle(.plain)
@@ -28,31 +28,31 @@ struct SettingsListView: View {
         HStack {
             Text("Status")
             Spacer()
-            Picker("", selection: $vm.selectedStatus) {
-                ForEach(vm.statusSelections, id: \.self) {
+            Picker("", selection: $profileVm.selectedStatus) {
+                ForEach(profileVm.statusSelections, id: \.self) {
                     Text($0)
                         .foregroundColor(.black)
                 }
             }.pickerStyle(.menu)
-                .onChange(of: vm.selectedStatus) { newValue in
-                    vm.saveUserStatusToFireStore()
-                    print(vm.selectedStatus + "setted.")
-                    viewModel.fetchCurrentUser()
-                    viewModel.fetchRecentMessages()
+                .onChange(of: profileVm.selectedStatus) { newValue in
+                    profileVm.saveUserStatusToFireStore()
+                    print(profileVm.selectedStatus + "setted.")
+                    mainVm.fetchCurrentUser()
+                    mainVm.fetchRecentMessages()
                 }
         }
     }
     private var favoriteMessages: some View {
         NavigationLink {
                 FavoriteMessagesScreen()
-                    .environmentObject(viewModel)
+                    .environmentObject(mainVm)
         } label: {
             Text("Favorite Messages")
         }
     }
     private var deleteAccountButton: some View {
         Button(role: .destructive) {
-            vm.showDeleteAccountAlert = true
+            profileVm.showDeleteAccountAlert = true
         } label: {
             Text("Delete Account")
         }
@@ -62,10 +62,10 @@ struct SettingsListView: View {
             Text("Dark Mode")
             Spacer()
             
-            Toggle("", isOn: $vm.isDarkModeOn)
+            Toggle("", isOn: $profileVm.isDarkModeOn)
                 .tint(.fire)
                 .onTapGesture {
-                    if vm.isDarkModeOn == false {
+                    if profileVm.isDarkModeOn == false {
                         UserDefaultService.shared.setTheme(isDarkTheme: true)
                     } else {
                         UserDefaultService.shared.setTheme(isDarkTheme: false)

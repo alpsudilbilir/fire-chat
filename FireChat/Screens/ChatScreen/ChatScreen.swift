@@ -9,25 +9,24 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ChatScreen: View {
-    @EnvironmentObject var profileVm: ProfileScreenViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    let user: User?
+    @EnvironmentObject var profileVm: ProfileScreenViewModel
     @FocusState private var keyboardState: Bool
     @State var image: UIImage?
     @State var showImagePickerSheet = false
     @State var isUserSendingImage = false
     @State var showMessageDialog = false
     @State var refresh: Bool = false
-    
+    let user: User?
     
     init(user: User) {
         self.user = user
-        self.vm = .init(user: user)
-        vm.fetchMessages()
-        vm.fetchUserStatus(uid: user.uid)
+        self.chatVm = .init(user: user)
+        chatVm.fetchMessages()
+        chatVm.fetchUserStatus(uid: user.uid)
     }
     
-    @ObservedObject var vm : ChatScreenViewModel
+    @ObservedObject var chatVm : ChatScreenViewModel
     
     
     var body: some View {
@@ -45,25 +44,25 @@ struct ChatScreen: View {
             }
             bottomBar
         }
-        .onChange(of: vm.messageText, perform: { newValue in
-            if !vm.messageText.isEmpty {
-                vm.isSendButtonDisabled = false
+        .onChange(of: chatVm.messageText, perform: { newValue in
+            if !chatVm.messageText.isEmpty {
+                chatVm.isSendButtonDisabled = false
             } else {
-                vm.isSendButtonDisabled = true
+                chatVm.isSendButtonDisabled = true
             }
         })
         .sheet(isPresented: $showImagePickerSheet, content: {
             ImagePicker(image: $image)
                 .onDisappear {
                     if let image = image {
-                        vm.saveChatImageToStorage(image: image)
+                        chatVm.saveChatImageToStorage(image: image)
                     }
                 }
         })
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(true)
         .onDisappear {
-            vm.snapshotListener?.remove()
+            chatVm.snapshotListener?.remove()
         }
     }
     private var navbarView: some View {
@@ -92,9 +91,9 @@ struct ChatScreen: View {
                     .bold()
                 HStack(spacing: 3) {
                     Circle()
-                        .foregroundColor(Color.statusColor(status: vm.userStatus ))
+                        .foregroundColor(Color.statusColor(status: chatVm.userStatus ))
                         .frame(width: 8, height: 8)
-                    Text(vm.userStatus ?? "")
+                    Text(chatVm.userStatus ?? "")
                         .font(.caption)
                 }
             }
@@ -107,10 +106,10 @@ struct ChatScreen: View {
         ScrollView {
             ScrollViewReader { reader in
                 VStack {
-                    ForEach(vm.messages) { message in
+                    ForEach(chatVm.messages) { message in
                         if let user = user {
                             MessageCell(user: user ,message: message)
-                                .onChange(of: vm.messages.count) { newValue in
+                                .onChange(of: chatVm.messages.count) { newValue in
                                     withAnimation(.easeOut(duration: 0.5)) {
                                         reader.scrollTo("bottom", anchor: .bottom)
                                     }
@@ -128,7 +127,7 @@ struct ChatScreen: View {
         }
         .onTapGesture {
             keyboardState = false
-            vm.placeholder = "Message"
+            chatVm.placeholder = "Message"
         }
     }
     private var bottomBar: some View {
@@ -143,29 +142,29 @@ struct ChatScreen: View {
                         .font(.system(size: 32))
                         .foregroundColor(.gray)
                 }
-                TextEditor(text: $vm.messageText)
+                TextEditor(text: $chatVm.messageText)
                     .frame(maxWidth: .infinity, minHeight: 32, idealHeight: 32, maxHeight: 32, alignment: .center)
                     .focused($keyboardState)
                     .overlay {
                         HStack {
-                            Text(vm.placeholder)
+                            Text(chatVm.placeholder)
                                 .foregroundColor(.gray)
                             Spacer()
                         }
                     }
                     .onTapGesture {
-                        vm.placeholder = ""
+                        chatVm.placeholder = ""
                     }
             }.padding(.horizontal)
             
             Button {
                 isUserSendingImage = false
-                vm.handleSend(imageUrl: vm.imageUrl)
+                chatVm.handleSend(imageUrl: chatVm.imageUrl)
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
                     .font(.system(size: 32))
-                    .foregroundColor(vm.checkSendButton()  ? .gray : .fire)
-            }.disabled(vm.checkSendButton())
+                    .foregroundColor(chatVm.checkSendButton()  ? .gray : .fire)
+            }.disabled(chatVm.checkSendButton())
             Spacer()
         }
     }

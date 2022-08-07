@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @EnvironmentObject var viewModel:  MainMessagesViewModel
+    @EnvironmentObject var mainVm:  MainMessagesViewModel
     @State var user = User()
-    var fireBaseManager = FireBaseManager()
     var body: some View {
         ScrollView {
             HStack {
@@ -25,7 +24,7 @@ struct LoginScreen: View {
             CustomSecureField(prompt: "Password", text: $user.password)
             
             Button {
-                viewModel.loginUser(email: user.email, password: user.password)
+                mainVm.loginUser(email: user.email, password: user.password)
             } label: {
                 Text("Login")
                     .foregroundColor(.white)
@@ -37,10 +36,10 @@ struct LoginScreen: View {
             Spacer()
         }
         .onDisappear(perform: {
-            viewModel.isProgressContinues = false
+            mainVm.isProgressContinues = false
         })
         .overlay(content: {
-            if viewModel.isProgressContinues {
+            if mainVm.isProgressContinues {
                 ProgressView()
                     .tint(.fire)
                     .scaleEffect(x: 3, y: 3, anchor: .center)

@@ -10,16 +10,16 @@ import SDWebImageSwiftUI
 
 struct FavoriteMessagesScreen: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var viewModel =  MainMessagesViewModel()
+    @ObservedObject var mainVm =  MainMessagesViewModel()
     
     init() {
-        viewModel.fetchFavoriteMessages()
+        mainVm.fetchFavoriteMessages()
     }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                ForEach(viewModel.favoriteChatMessages, id: \.id) { message in
+                ForEach(mainVm.favoriteChatMessages, id: \.id) { message in
                     VStack {
                         HStack(alignment: .top, spacing: 7) {
                             WebImage(url: URL(string: message.imageUrl!))
@@ -51,7 +51,7 @@ struct FavoriteMessagesScreen: View {
                     }.padding(.horizontal)
                         .contextMenu(menuItems: {
                             Button {
-                                viewModel.deleteFavoriteMessage(message: message)
+                                mainVm.deleteFavoriteMessage(message: message)
                             } label: {
                                 Text("Remove from favorites")
                             }

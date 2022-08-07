@@ -9,13 +9,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct CustomNavBar: View {
-    @EnvironmentObject var vm: ProfileScreenViewModel
-    @EnvironmentObject var viewModel: MainMessagesViewModel
+    @EnvironmentObject var profileVm: ProfileScreenViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
     @State var showNewMessageScreen = false
     @State var showConfirmationDialog = false
     var body: some View {
         HStack(spacing: 15) {
-            WebImage(url: URL(string: viewModel.currentUser?.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
+            WebImage(url: URL(string: mainVm.currentUser?.imageUrl ?? "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 40, height: 40)
@@ -23,13 +23,13 @@ struct CustomNavBar: View {
                 .clipped()
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(.fire))
             VStack(alignment: .leading, spacing: 0) {
-                Text(viewModel.currentUser?.email.components(separatedBy: "@").first ?? "Unkown")
+                Text(mainVm.currentUser?.email.components(separatedBy: "@").first ?? "Unkown")
                     .font(.system(size: 24, weight: .semibold))
                 HStack {
                     Circle()
-                        .foregroundColor(Color.statusColor(status: viewModel.currentUser?.status ?? ""))
+                        .foregroundColor(Color.statusColor(status: mainVm.currentUser?.status ?? ""))
                         .frame(width: 8, height: 8)
-                    Text(viewModel.currentUser?.status ?? "")
+                    Text(mainVm.currentUser?.status ?? "")
                         .foregroundColor(Color.gray)
                         .font(.caption)
                 }
@@ -57,14 +57,14 @@ struct CustomNavBar: View {
         .padding(.horizontal)
         .fullScreenCover(isPresented: $showNewMessageScreen) {
             NewMessageScreen(didSelectNewUser: { user  in
-                viewModel.userThatWillBeMessaged = user
-                viewModel.isNavigationLinkActive.toggle()
+                mainVm.userThatWillBeMessaged = user
+                mainVm.isNavigationLinkActive.toggle()
                  })
         }
         .confirmationDialog(Text("Do you want to sign out?"), isPresented: $showConfirmationDialog, actions: {
             Button("Cancel", role: .cancel) { }
             Button("Sign out", role: .destructive) {
-                viewModel.signOut()
+                mainVm.signOut()
             }
         })
     }

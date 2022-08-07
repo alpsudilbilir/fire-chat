@@ -8,31 +8,31 @@
 import SwiftUI
 
 struct MainMessagesScreen: View {
-    @EnvironmentObject var vm: ProfileScreenViewModel
-    @EnvironmentObject var viewModel: MainMessagesViewModel
+    @EnvironmentObject var profileVm: ProfileScreenViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
     var body: some View {
         VStack {
             CustomNavBar()
             MessageItem { user in
-                viewModel.userThatWillBeMessaged = user
+                mainVm.userThatWillBeMessaged = user
                 print(user!.email + "Setted to userthatwillbemessaged.")
-                viewModel.isNavigationLinkActive.toggle()
+                mainVm.isNavigationLinkActive.toggle()
             }
-            if let user = viewModel.userThatWillBeMessaged {
-                NavigationLink("", isActive: $viewModel.isNavigationLinkActive) {
+            if let user = mainVm.userThatWillBeMessaged {
+                NavigationLink("", isActive: $mainVm.isNavigationLinkActive) {
                     ChatScreen(user: user)
-                        .environmentObject(vm)
+                        .environmentObject(profileVm)
                 }
             }
         }
-        .environmentObject(vm)
-        .environmentObject(viewModel)
+        .environmentObject(profileVm)
+        .environmentObject(mainVm)
         .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $viewModel.isUserLoggedOut, onDismiss: nil) {
+        .fullScreenCover(isPresented: $mainVm.isUserLoggedOut, onDismiss: nil) {
             LoginRegisterScreen()
-                .environmentObject(viewModel)
+                .environmentObject(mainVm)
                 .onDisappear {
-                    viewModel.fetchRecentMessages()
+                    mainVm.fetchRecentMessages()
                 }
         }
     }

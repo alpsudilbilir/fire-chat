@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterScreen: View {
-    @EnvironmentObject var viewModel: MainMessagesViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
     @State var user = User()
     @State var showImagePicker = false
     @State var image: UIImage?
@@ -49,7 +49,7 @@ struct RegisterScreen: View {
             
             CustomSecureField(prompt: "Password", text: $user.password)
             Button {
-                viewModel.createNewAccount(email: user.email, password: user.password, image: image ?? nil)
+                mainVm.createNewAccount(email: user.email, password: user.password, image: image ?? nil)
             } label: {
                 Text("Register")
                     .foregroundColor(.white)
@@ -60,10 +60,10 @@ struct RegisterScreen: View {
             }
         }
         .onDisappear(perform: {
-            viewModel.isProgressContinues = false
+            mainVm.isProgressContinues = false
         })
         .overlay(content: {
-            if viewModel.isProgressContinues {
+            if mainVm.isProgressContinues {
                 ProgressView()
                     .tint(.fire)
                     .scaleEffect(x: 3, y: 3, anchor: .center)

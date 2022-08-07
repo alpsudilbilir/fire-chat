@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginRegisterScreen: View {
-    @EnvironmentObject var viewModel: MainMessagesViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
     let screens = ["Login", "Register"]
     @State private var selectedScreen = "Login"
     
@@ -29,17 +29,17 @@ struct LoginRegisterScreen: View {
             }
             Spacer()
         }
-        .environmentObject(viewModel)
-        .alert("Registiration Failed", isPresented: $viewModel.showRegistirationAlert) {
-            Button(role: .none, action: { viewModel.showRegistirationAlert = false }) {
+        .environmentObject(mainVm)
+        .alert("Registiration Failed", isPresented: $mainVm.showRegistirationAlert) {
+            Button(role: .none, action: { mainVm.showRegistirationAlert = false }) {
                 Text("Try again")
                     .foregroundColor(.fire)
             }
         } message: {
             Text("Please make sure fill all the fields and select a photo")
         }
-        .alert("Login Failed", isPresented: $viewModel.showLoginAlert) {
-            Button(role: .none, action: { viewModel.showLoginAlert = false }) {
+        .alert("Login Failed", isPresented: $mainVm.showLoginAlert) {
+            Button(role: .none, action: { mainVm.showLoginAlert = false }) {
                 Text("Try again")
                     .foregroundColor(.fire)
             }

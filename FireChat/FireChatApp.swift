@@ -13,20 +13,18 @@ import Firebase
 //TODO: Fix the bug. (When chat message deleted view is not refreshing.)
 //--------------------
 struct FireChatApp: App {
-    @StateObject var viewModel =  MainMessagesViewModel()
-    @StateObject var vm = ProfileScreenViewModel()
     @Environment(\.colorScheme) var colorScheme
+    @StateObject var mainMessagesVm =  MainMessagesViewModel()
+    @StateObject var profileVm = ProfileScreenViewModel()
     init() {
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme( vm.isDarkModeOn  ? .dark : .light)
-                .environmentObject(viewModel)
-                .environmentObject(vm)
+                .preferredColorScheme( profileVm.isDarkModeOn  ? .dark : .light)
+                .environmentObject(mainMessagesVm)
+                .environmentObject(profileVm)
         }
-
-        
     }
 }

@@ -31,6 +31,7 @@
 		1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */; };
 		1585AB0F2863DE5E00957B30 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */; };
 		1585AB122863DECB00957B30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585AB112863DECB00957B30 /* User.swift */; };
+		158A14C1289FD1D800A7156C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A14C0289FD1D800A7156C /* ViewExtensions.swift */; };
 		158DC36928842C1100D4B2E1 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36828842C1100D4B2E1 /* ProfileScreen.swift */; };
 		158DC36B2884372600D4B2E1 /* PhotoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158DC36A2884372600D4B2E1 /* PhotoScreen.swift */; };
 		158FB965286FA56900A1F902 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158FB964286FA56900A1F902 /* ChatScreen.swift */; };
@@ -68,6 +69,7 @@
 		1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		1585AB0E2863DE5E00957B30 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		1585AB112863DECB00957B30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		158A14C0289FD1D800A7156C /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		158DC36828842C1100D4B2E1 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		158DC36A2884372600D4B2E1 /* PhotoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoScreen.swift; sourceTree = "<group>"; };
 		158FB964286FA56900A1F902 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
@@ -162,8 +164,8 @@
 		155802B72888AA1A00B28294 /* ChatScreen */ = {
 			isa = PBXGroup;
 			children = (
-				158FB964286FA56900A1F902 /* ChatScreen.swift */,
 				150E820D28778D790044A82D /* ChatScreenViewModel.swift */,
+				158FB964286FA56900A1F902 /* ChatScreen.swift */,
 				15997243287C3C6800832589 /* MessageCell.swift */,
 			);
 			path = ChatScreen;
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				1585AB0C2863DC0F00957B30 /* ColorExtensions.swift */,
+				158A14C0289FD1D800A7156C /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				1585AB0A2863DA0E00957B30 /* CustomTextField.swift in Sources */,
 				158DC36928842C1100D4B2E1 /* ProfileScreen.swift in Sources */,
 				1585AB0D2863DC0F00957B30 /* ColorExtensions.swift in Sources */,
+				158A14C1289FD1D800A7156C /* ViewExtensions.swift in Sources */,
 				15BAA074286A3E4400B26884 /* MainMessagesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

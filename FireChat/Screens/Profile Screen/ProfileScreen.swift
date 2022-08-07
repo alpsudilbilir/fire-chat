@@ -9,14 +9,14 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileScreen: View {
-    @EnvironmentObject var viewModel: MainMessagesViewModel
-    @EnvironmentObject var vm: ProfileScreenViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
+    @EnvironmentObject var profileVm: ProfileScreenViewModel
     var body: some View {
         VStack {
-            if let imageURL = viewModel.currentUser?.imageUrl {
+            if let imageURL = mainVm.currentUser?.imageUrl {
                 NavigationLink {
                     PhotoScreen(imageURL: imageURL, isEditButtonAvailable: true)
-                        .environmentObject(viewModel)
+                        .environmentObject(mainVm)
                 } label: {
                     WebImage(url: URL(string: imageURL))
                         .resizable()
@@ -33,7 +33,7 @@ struct ProfileScreen: View {
                     .cornerRadius(75)
                     .foregroundColor(.fire)
             }
-            Text(viewModel.currentUser?.username ?? "Unkown")
+            Text(mainVm.currentUser?.username ?? "Unkown")
                 .font(.system(size: 36))
             Spacer()
             HStack {
@@ -46,16 +46,16 @@ struct ProfileScreen: View {
             .padding(.horizontal)
             
             SettingsListView()
-                .environmentObject(vm)
-                .environmentObject(viewModel)
+                .environmentObject(profileVm)
+                .environmentObject(mainVm)
             
         }
-        .alert("Do you want to delete your account?", isPresented: $vm.showDeleteAccountAlert, actions: {
+        .alert("Do you want to delete your account?", isPresented: $profileVm.showDeleteAccountAlert, actions: {
             Button(role: .cancel, action: {}) {
                 Text("Cancel")
             }
             Button(role: .destructive) {
-                viewModel.deleteAccount()
+                mainVm.deleteAccount()
             } label: {
                 Text("Delete")
             }

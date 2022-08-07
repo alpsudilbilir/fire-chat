@@ -9,12 +9,15 @@ import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
 struct PhotoScreen: View {
-    @EnvironmentObject var viewModel: MainMessagesViewModel
+    @EnvironmentObject var mainVm: MainMessagesViewModel
+    
     let imageURL: String
+    
     @State var isConfirmationDialogActive = false
     @State var showPicker = false
     @State var image: UIImage?
     @State var isEditButtonAvailable = false
+    
     var body: some View {
         ZStack {
             VStack {
@@ -24,7 +27,7 @@ struct PhotoScreen: View {
                     .clipped()
             }
             .overlay(content: {
-                if viewModel.isPhotoLoading {
+                if mainVm.isPhotoLoading {
                     ProgressView()
                         .tint(.fire)
                         .scaleEffect(x: 3, y: 3, anchor: .center)
@@ -36,7 +39,7 @@ struct PhotoScreen: View {
             ImagePicker(image: $image)
                 .onDisappear {
                     if let image = image {
-                        viewModel.saveImageToStorage(email: viewModel.currentUser?.email ?? "", password: viewModel.currentUser?.password ?? "", image: image)
+                        mainVm.saveImageToStorage(email: mainVm.currentUser?.email ?? "", password: mainVm.currentUser?.password ?? "", image: image)
                     }
                 }
         })
