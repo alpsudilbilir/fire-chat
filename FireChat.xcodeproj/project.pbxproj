@@ -174,11 +174,11 @@
 		1585AB012863D72C00957B30 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				15BAA06A286A178D00B26884 /* MainMessageScreen */,
 				155802B72888AA1A00B28294 /* ChatScreen */,
 				158DC36728842BFB00D4B2E1 /* Profile Screen */,
-				15BAA069286A175600B26884 /* LoginRegisterScreens */,
-				15BAA06A286A178D00B26884 /* MainMessageScreen */,
 				15B36CD6286E6F1700E2ECB9 /* NewMessageScreen */,
+				15BAA069286A175600B26884 /* LoginRegisterScreens */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

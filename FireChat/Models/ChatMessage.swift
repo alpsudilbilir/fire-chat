@@ -22,6 +22,12 @@ struct ChatMessage:Codable, Identifiable {
         formatter.unitsStyle = .abbreviated
         return formatter.localizedString(for: timestamp, relativeTo: Date())
     }
+    
+    var sentTime: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: timestamp)
+    }
 
 }
 

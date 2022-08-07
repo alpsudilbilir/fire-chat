@@ -14,7 +14,6 @@ class UserDefaultService {
     func getTheme() -> Bool {
         let isThemeDark = UserDefaults.standard.bool(forKey: "theme")
         return isThemeDark
-        
     }
     func setTheme(isDarkTheme: Bool) {
         UserDefaults.standard.set(isDarkTheme, forKey: "theme")

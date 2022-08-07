@@ -41,7 +41,7 @@ struct MessageCell: View {
                             .foregroundColor(.white)
                         VStack {
                             Spacer()
-                            Text("15.42")
+                            Text(message.sentTime)
                                 .foregroundColor(.white)
                                 .font(.caption2)
                         }
@@ -100,6 +100,12 @@ struct MessageCell: View {
                     HStack {
                         Text(message.message)
                             .foregroundColor(colorScheme == .dark ? .white : .black)
+                        VStack {
+                            Spacer()
+                            Text(message.sentTime)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .font(.caption2)
+                        }
                     }
                     .padding()
                     .background(colorScheme == .dark ? .gray.opacity(0.3)  : .gray.opacity(0.1))
