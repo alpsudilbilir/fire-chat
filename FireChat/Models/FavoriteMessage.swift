@@ -22,5 +22,9 @@ struct FavoriteMessage: Codable, Identifiable {
         formatter.unitsStyle = .abbreviated
         return formatter.localizedString(for: timestamp, relativeTo: Date())
     }
+    
+    var fromUser: String {
+        from.components(separatedBy: "@").first ?? from
+    }
 
 }

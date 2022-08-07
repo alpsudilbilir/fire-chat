@@ -29,8 +29,7 @@ struct FavoriteMessagesScreen: View {
                                 .cornerRadius(55)
                                 .clipped()
                             VStack(alignment: .leading, spacing: 3) {
-                                Text(message.from)
-                                    .bold()
+                                Text(message.fromUser)
                                 HStack {
                                     Text(message.message)
                                         .foregroundColor(.white)

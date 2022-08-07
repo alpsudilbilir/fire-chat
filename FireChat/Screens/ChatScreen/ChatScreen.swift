@@ -34,9 +34,14 @@ struct ChatScreen: View {
             navbarView
             if isUserSendingImage {
                 if let image = image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
+                    VStack {
+                        Spacer()
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                        Spacer()
+                    }
+           
                 }
             } else {
                 messageView
