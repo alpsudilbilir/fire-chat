@@ -1,9 +1,9 @@
 # FireChat 🔥💬
 Firechat is an instant messaging app developed by using SwiftUI framework. Fire chat allows you to send and receive text messages and photos. Also provides personal settings. 
 
-## Screenshots
+## Screenshots 📱
 Loading...
-## Project Features
+## Project Features 
  - Instant messaging
  - Support Text & Image Types
  - Dark Mode Support
@@ -14,7 +14,7 @@ Loading...
 ## Dependency
  - Firebase (Auth, Firestore, Storage, FirebaseFirestoreSwift) [Docs](https://firebase.google.com/docs/ios/setup)
  - SDWebImageSwiftUI [Library Link](https://github.com/SDWebImage/SDWebImageSwiftUI)
-## Getting Started
+## Getting Started ⚒
  - Clone this repository.
 
 
@@ -29,7 +29,7 @@ git clone https://github.com/alpsudilbilir/fire-chat.git
  - Add SDWebImageSwiftUI package from [here](https://github.com/SDWebImage/SDWebImageSwiftUI).
  - Run the project. 
 
-## Project Structrue
+## Project Structure 🦚
 
 ```swift
 ├── FireChatApp.swift
