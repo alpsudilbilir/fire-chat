@@ -21,6 +21,8 @@ class MainMessagesViewModel: ObservableObject {
     @Published var isPhotoLoading = false
     @Published var showLoginAlert = false
     @Published var showRegistirationAlert = false
+    @Published var showNewMessageScreen = false
+
     @Published var favoriteChatMessages = [FavoriteMessage]()
     private var firestoreListeener: ListenerRegistration?
     

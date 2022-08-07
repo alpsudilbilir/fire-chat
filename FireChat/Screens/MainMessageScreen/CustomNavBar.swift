@@ -11,7 +11,6 @@ import SDWebImageSwiftUI
 struct CustomNavBar: View {
     @EnvironmentObject var profileVm: ProfileScreenViewModel
     @EnvironmentObject var mainVm: MainMessagesViewModel
-    @State var showNewMessageScreen = false
     @State var showConfirmationDialog = false
     var body: some View {
         HStack(spacing: 15) {
@@ -36,7 +35,7 @@ struct CustomNavBar: View {
             }
             Spacer()
             Button {
-                showNewMessageScreen.toggle()
+                mainVm.showNewMessageScreen.toggle()
             } label: {
                 Image(systemName: "plus.bubble")
                     .resizable()
@@ -55,7 +54,7 @@ struct CustomNavBar: View {
             }
         }
         .padding(.horizontal)
-        .fullScreenCover(isPresented: $showNewMessageScreen) {
+        .fullScreenCover(isPresented: $mainVm.showNewMessageScreen) {
             NewMessageScreen(didSelectNewUser: { user  in
                 mainVm.userThatWillBeMessaged = user
                 mainVm.isNavigationLinkActive.toggle()

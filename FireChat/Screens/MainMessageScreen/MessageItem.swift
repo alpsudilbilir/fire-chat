@@ -21,14 +21,27 @@ struct MessageItem: View {
     var body: some View {
         ScrollView {
             if mainVm.recentMessages.isEmpty {
-                VStack {
+                VStack(spacing: 40) {
                     Spacer()
-                    Text("No Message Found. Text Someone!")
+                    Text("Your message box is empty\nSend message to someone")
+                        .bold()
                         .font(.title2)
-                        .foregroundColor(.fire)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.fire)
+                        .cornerRadius(50)
+
+                    Button {
+                        mainVm.showNewMessageScreen.toggle()
+                    } label: {
+                        VStack {
+                            Image(systemName: "plus.message.fill")
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                        }
+                    }
                     Spacer()
                 }
-                
             } else {
                 ForEach(mainVm.recentMessages, id:\.id) { recentMessage in
                         Button {

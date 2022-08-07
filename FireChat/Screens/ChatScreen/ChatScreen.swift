@@ -41,7 +41,6 @@ struct ChatScreen: View {
                             .scaledToFit()
                         Spacer()
                     }
-           
                 }
             } else {
                 messageView
