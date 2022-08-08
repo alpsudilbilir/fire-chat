@@ -2,7 +2,8 @@
 Firechat is an instant messaging app developed by using SwiftUI framework. Fire chat allows you to send and receive text messages and photos. Also provides personal settings. 
 
 ## Screenshots 📱
-Loading...
+![FireChat](https://user-images.githubusercontent.com/87194129/183527255-d5bb0a5b-3642-4bf4-835f-c91a14a7059d.png)
+
 ## Project Features 
  - Instant messaging
  - Support Text & Image Types
