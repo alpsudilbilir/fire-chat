@@ -24,8 +24,9 @@ struct FavoriteMessagesScreen: View {
                         HStack(alignment: .top, spacing: 7) {
                             WebImage(url: URL(string: message.imageUrl!))
                                 .resizable()
-                                .frame(width: 55, height: 55)
                                 .scaledToFill()
+
+                                .frame(width: 55, height: 55)
                                 .cornerRadius(55)
                                 .clipped()
                             VStack(alignment: .leading, spacing: 3) {
